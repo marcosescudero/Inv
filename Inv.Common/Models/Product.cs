@@ -13,7 +13,7 @@
         public string Barcode { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(250)]
         public string Description { get; set; }
 
         [Required]

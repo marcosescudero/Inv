@@ -10,7 +10,8 @@
         public int MeasureUnitId { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(250)]
+        [Display(Name = "U.M. Description")]
         public string Description { get; set; }
 
         
