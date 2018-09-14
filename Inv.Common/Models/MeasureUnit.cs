@@ -7,6 +7,7 @@
     public class MeasureUnit
     {
         [Key]
+        [Display(Name = "Unit of Measure")]
         public int MeasureUnitId { get; set; }
 
         [Required]
