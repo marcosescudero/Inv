@@ -8,107 +8,107 @@
     using System.Web.Mvc;
 
     [Authorize]
-    public class MeasureUnitsController : Controller
+    public class LocationsController : Controller
     {
         private LocalDataContext db = new LocalDataContext();
 
-        // GET: MeasureUnits
+        // GET: Locations
         public async Task<ActionResult> Index()
         {
-            return View(await db.MeasureUnits.ToListAsync());
+            return View(await db.Locations.ToListAsync());
         }
 
-        // GET: MeasureUnits/Details/5
+        // GET: Locations/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MeasureUnit measureUnit = await db.MeasureUnits.FindAsync(id);
-            if (measureUnit == null)
+            Location location = await db.Locations.FindAsync(id);
+            if (location == null)
             {
                 return HttpNotFound();
             }
-            return View(measureUnit);
+            return View(location);
         }
 
-        // GET: MeasureUnits/Create
+        // GET: Locations/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: MeasureUnits/Create
+        // POST: Locations/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "MeasureUnitId,Description")] MeasureUnit measureUnit)
+        public async Task<ActionResult> Create([Bind(Include = "LocationId,Description")] Location location)
         {
             if (ModelState.IsValid)
             {
-                db.MeasureUnits.Add(measureUnit);
+                db.Locations.Add(location);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(measureUnit);
+            return View(location);
         }
 
-        // GET: MeasureUnits/Edit/5
+        // GET: Locations/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MeasureUnit measureUnit = await db.MeasureUnits.FindAsync(id);
-            if (measureUnit == null)
+            Location location = await db.Locations.FindAsync(id);
+            if (location == null)
             {
                 return HttpNotFound();
             }
-            return View(measureUnit);
+            return View(location);
         }
 
-        // POST: MeasureUnits/Edit/5
+        // POST: Locations/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "MeasureUnitId,Description")] MeasureUnit measureUnit)
+        public async Task<ActionResult> Edit([Bind(Include = "LocationId,Description")] Location location)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(measureUnit).State = EntityState.Modified;
+                db.Entry(location).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(measureUnit);
+            return View(location);
         }
 
-        // GET: MeasureUnits/Delete/5
+        // GET: Locations/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MeasureUnit measureUnit = await db.MeasureUnits.FindAsync(id);
-            if (measureUnit == null)
+            Location location = await db.Locations.FindAsync(id);
+            if (location == null)
             {
                 return HttpNotFound();
             }
-            return View(measureUnit);
+            return View(location);
         }
 
-        // POST: MeasureUnits/Delete/5
+        // POST: Locations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            MeasureUnit measureUnit = await db.MeasureUnits.FindAsync(id);
-            db.MeasureUnits.Remove(measureUnit);
+            Location location = await db.Locations.FindAsync(id);
+            db.Locations.Remove(location);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

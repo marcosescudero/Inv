@@ -4,10 +4,10 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class Product
+    public class Item
     {
         [Key]
-        public int ProductId { get; set; }
+        public int ItemId { get; set; }
 
         [StringLength(50)]
         public string Barcode { get; set; }
@@ -35,7 +35,7 @@
             {
                 if (string.IsNullOrEmpty(this.ImagePath))
                 {
-                    return "noproduct";
+                    return "noimage";
                 }
                 //return $"http://200.55.241.235/InvBackend{this.ImagePath.Substring(1)}"; // el substring es para quitarle el ñuflo
                 return $"http://200.55.241.235/InvAPI{this.ImagePath.Substring(1)}"; // el substring es para quitarle el ñuflo
@@ -48,6 +48,8 @@
         }
 
         public virtual MeasureUnit MeasureUnit { get; set; }
+
+        public virtual ICollection<Count> Counts { get; set; }
 
     }
 }

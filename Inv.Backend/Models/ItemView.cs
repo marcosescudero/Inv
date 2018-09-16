@@ -5,7 +5,7 @@ namespace Inv.Backend.Models
     using System.Web;
     using Common.Models;
 
-    public class ProductView: Product
+    public class ItemView :Item
     {
         [Display(Name = "Image")]
         public HttpPostedFileBase ImageFile { get; set; }

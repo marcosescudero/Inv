@@ -11,7 +11,7 @@ namespace Inv.Domain.Models
         }
         #endregion
 
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Item> Items { get; set; }
 
         public System.Data.Entity.DbSet<Inv.Common.Models.MeasureUnit> MeasureUnits { get; set; }
     }

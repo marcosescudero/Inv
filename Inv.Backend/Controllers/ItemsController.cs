@@ -1,55 +1,54 @@
-﻿
-namespace Inv.Backend.Controllers
+﻿namespace Inv.Backend.Controllers
 {
     using System;
     using System.Data.Entity;
     using System.Net;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Inv.Backend.Helpers;
-    using Inv.Backend.Models;
-    using Inv.Common.Models;
+    using Backend.Helpers;
+    using Backend.Models;
+    using Common.Models;
 
     [Authorize]
-    public class ProductsController : Controller
+    public class ItemsController : Controller
     {
         private LocalDataContext db = new LocalDataContext();
 
-        // GET: Products
+        // GET: Items
         public async Task<ActionResult> Index()
         {
-            var products = this.db.Products.Include(p => p.MeasureUnit);
-            return View(await products.ToListAsync());
+            var items = db.Items.Include(i => i.MeasureUnit);
+            return View(await items.ToListAsync());
         }
 
-        // GET: Products/Details/5
+        // GET: Items/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = await this.db.Products.FindAsync(id);
-            if (product == null)
+            Item item = await db.Items.FindAsync(id);
+            if (item == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(item);
         }
 
-        // GET: Products/Create
+        // GET: Items/Create
         public ActionResult Create()
         {
-            ViewBag.MeasureUnitId = new SelectList(this.db.MeasureUnits, "MeasureUnitId", "Description");
+            ViewBag.MeasureUnitId = new SelectList(db.MeasureUnits, "MeasureUnitId", "Description");
             return View();
         }
 
-        // POST: Products/Create
+        // POST: Items/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(ProductView view)
+        public async Task<ActionResult> Create(ItemView view)
         {
             if (ModelState.IsValid)
             {
@@ -62,73 +61,77 @@ namespace Inv.Backend.Controllers
                     pic = $"{folder}/{pic}";
                 }
 
-                var product = this.ToProduct(view,pic);
-                this.db.Products.Add(product);
-                await this.db.SaveChangesAsync();
+                var item = this.ToItem(view, pic);
+
+                this.db.Items.Add(item);
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MeasureUnitId = new SelectList(this.db.MeasureUnits, "MeasureUnitId", "Description", view.MeasureUnitId);
+            ViewBag.MeasureUnitId = new SelectList(db.MeasureUnits, "MeasureUnitId", "Description", view.MeasureUnitId);
             return View(view);
         }
 
-        private Product ToProduct(ProductView view, string pic)
+        private Item ToItem(ItemView view, string pic)
         {
-            return new Product
+            return new Item
             {
                 Description = view.Description,
                 ImagePath = pic,
                 IsAvailable = view.IsAvailable,
-                ProductId = view.ProductId,
                 Barcode = view.Barcode,
-                ImageArray = view.ImageArray,
+                ItemId = view.ItemId,
                 MeasureUnit = view.MeasureUnit,
+                ImageArray = view.ImageArray,
                 MeasureUnitId = view.MeasureUnitId,
-                
             };
         }
 
-        // GET: Products/Edit/5
+        // GET: Items/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = await this.db.Products.FindAsync(id);
-            if (product == null)
+            Item item = await this.db.Items.FindAsync(id);
+            if (item == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.MeasureUnitId = new SelectList(this.db.MeasureUnits, "MeasureUnitId", "Description", product.MeasureUnitId);
-            var view = this.ToView(product);
+
+
+            ViewBag.MeasureUnitId = new SelectList(db.MeasureUnits, "MeasureUnitId", "Description", item.MeasureUnitId);
+
+            var view = this.ToView(item);
             return View(view);
         }
 
-        private object ToView(Product product)
+        private ItemView ToView(Item item)
         {
-            return new ProductView
+            return new ItemView
             {
-                Description = product.Description,
-                ImagePath = product.ImagePath,
-                IsAvailable = product.IsAvailable,
-                ProductId = product.ProductId,
-                Barcode = product.Barcode,
-                MeasureUnit = product.MeasureUnit,
-                MeasureUnitId = product.MeasureUnitId,
-                
+                Description = item.Description,
+                ImagePath = item.ImagePath,
+                IsAvailable = item.IsAvailable,
+                Barcode = item.Barcode,
+                ItemId = item.ItemId,
+                MeasureUnit = item.MeasureUnit,
+                ImageArray = item.ImageArray,
+                MeasureUnitId = item.MeasureUnitId,
             };
         }
 
-        // POST: Products/Edit/5
+        // POST: Items/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit( ProductView view)
+        public async Task<ActionResult> Edit(ItemView view)
         {
             if (ModelState.IsValid)
             {
+
                 var pic = view.ImagePath;
                 var folder = "~/Content/Products";
 
@@ -138,38 +141,39 @@ namespace Inv.Backend.Controllers
                     pic = $"{folder}/{pic}";
                 }
 
-                var product = this.ToProduct(view, pic);
-                this.db.Entry(product).State = EntityState.Modified;
-                await this.db.SaveChangesAsync();
+                var item = this.ToItem(view, pic);
+
+                db.Entry(item).State = EntityState.Modified;
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.MeasureUnitId = new SelectList(this.db.MeasureUnits, "MeasureUnitId", "Description", view.MeasureUnitId);
+            ViewBag.MeasureUnitId = new SelectList(db.MeasureUnits, "MeasureUnitId", "Description", view.MeasureUnitId);
             return View(view);
         }
 
-        // GET: Products/Delete/5
+        // GET: Items/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = await this.db.Products.FindAsync(id);
-            if (product == null)
+            Item item = await db.Items.FindAsync(id);
+            if (item == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(item);
         }
 
-        // POST: Products/Delete/5
+        // POST: Items/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Product product = await this.db.Products.FindAsync(id);
-            this.db.Products.Remove(product);
-            await this.db.SaveChangesAsync();
+            Item item = await db.Items.FindAsync(id);
+            db.Items.Remove(item);
+            await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
@@ -177,7 +181,7 @@ namespace Inv.Backend.Controllers
         {
             if (disposing)
             {
-                this.db.Dispose();
+                db.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -1,4 +1,4 @@
-﻿@model Inv.Common.Models.Product
+﻿@model Inv.Common.Models.Item
 
 @{
     ViewBag.Title = "Details";
@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Product</h4>
+    <h4>Item</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -53,6 +53,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductId }, new { @class = "btn btn-warning" }) |
-    @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-success" })
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ItemId }) |
+    @Html.ActionLink("Back to List", "Index")
 </p>

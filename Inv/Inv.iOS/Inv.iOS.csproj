@@ -160,4 +160,7 @@
       <Name>Inv</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\noimage.png" />
+  </ItemGroup>
 </Project>
