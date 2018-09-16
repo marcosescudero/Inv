@@ -12,107 +12,109 @@ using Inv.Common.Models;
 
 namespace Inv.Backend.Controllers
 {
-    public class LocationsController : Controller
+    public class CountsController : Controller
     {
         private LocalDataContext db = new LocalDataContext();
 
-        // GET: Locations
+        // GET: Counts
         public async Task<ActionResult> Index()
         {
-            return View(await db.Locations.ToListAsync());
+            var counts = db.Counts.Include(i => i.Item);
+            //return View(await db.Counts.ToListAsync());
+            return View(await counts.ToListAsync());
         }
 
-        // GET: Locations/Details/5
+        // GET: Counts/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Location location = await db.Locations.FindAsync(id);
-            if (location == null)
+            Count count = await db.Counts.FindAsync(id);
+            if (count == null)
             {
                 return HttpNotFound();
             }
-            return View(location);
+            return View(count);
         }
 
-        // GET: Locations/Create
+        // GET: Counts/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Locations/Create
+        // POST: Counts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "LocationId,Description")] Location location)
+        public async Task<ActionResult> Create([Bind(Include = "CountId,ItemId,LocationId,BinId,MeasureUnitId,Quantity,CountDate")] Count count)
         {
             if (ModelState.IsValid)
             {
-                db.Locations.Add(location);
+                db.Counts.Add(count);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(location);
+            return View(count);
         }
 
-        // GET: Locations/Edit/5
+        // GET: Counts/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Location location = await db.Locations.FindAsync(id);
-            if (location == null)
+            Count count = await db.Counts.FindAsync(id);
+            if (count == null)
             {
                 return HttpNotFound();
             }
-            return View(location);
+            return View(count);
         }
 
-        // POST: Locations/Edit/5
+        // POST: Counts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "LocationId,Description")] Location location)
+        public async Task<ActionResult> Edit([Bind(Include = "CountId,ItemId,LocationId,BinId,MeasureUnitId,Quantity,CountDate")] Count count)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(location).State = EntityState.Modified;
+                db.Entry(count).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(location);
+            return View(count);
         }
 
-        // GET: Locations/Delete/5
+        // GET: Counts/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Location location = await db.Locations.FindAsync(id);
-            if (location == null)
+            Count count = await db.Counts.FindAsync(id);
+            if (count == null)
             {
                 return HttpNotFound();
             }
-            return View(location);
+            return View(count);
         }
 
-        // POST: Locations/Delete/5
+        // POST: Counts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Location location = await db.Locations.FindAsync(id);
-            db.Locations.Remove(location);
+            Count count = await db.Counts.FindAsync(id);
+            db.Counts.Remove(count);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

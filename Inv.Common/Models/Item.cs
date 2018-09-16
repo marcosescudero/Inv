@@ -48,7 +48,7 @@
         }
 
         public virtual MeasureUnit MeasureUnit { get; set; }
-
+               
         public virtual ICollection<Count> Counts { get; set; }
 
     }

@@ -33,7 +33,7 @@ namespace Inv.Common.Models
         public DateTime CountDate { get; set; }
 
         public virtual Item Item { get; set; }
-        public virtual Location Location { get; set; }
+        //public virtual Location Location { get; set; }
 
     }
 }

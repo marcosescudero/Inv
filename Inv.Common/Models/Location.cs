@@ -13,6 +13,6 @@
 
         public virtual ICollection<Bin> Bins { get; set; }
 
-        public virtual ICollection<Count> Counts { get; set; }
+        //public virtual ICollection<Count> Counts { get; set; }
     }
 }

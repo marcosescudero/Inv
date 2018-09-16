@@ -1,0 +1,66 @@
+﻿@model Inv.Common.Models.Count
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Count</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocationId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocationId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BinId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BinId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MeasureUnitId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MeasureUnitId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CountDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CountDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CountId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

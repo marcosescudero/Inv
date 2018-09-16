@@ -1,6 +1,7 @@
 ﻿
 namespace Inv.Common.Models
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     public class Bin
     {
@@ -17,5 +18,8 @@ namespace Inv.Common.Models
         public int LocationId { get; set; }
 
         public virtual Location Location { get; set; }
+
+        //public virtual ICollection<Count> Counts { get; set; }
+
     }
 }

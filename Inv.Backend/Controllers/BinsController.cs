@@ -1,13 +1,17 @@
-﻿namespace Inv.Backend.Controllers
-{
-    using Inv.Backend.Models;
-    using Inv.Common.Models;
-    using System.Data.Entity;
-    using System.Net;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using Inv.Backend.Models;
+using Inv.Common.Models;
 
-    [Authorize]
+namespace Inv.Backend.Controllers
+{
     public class BinsController : Controller
     {
         private LocalDataContext db = new LocalDataContext();
