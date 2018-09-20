@@ -246,4 +246,10 @@
   <data name="Exit" xml:space="preserve">
 	<value>Chiudi sessione</value>
   </data>
+  <data name="InventoryCount" xml:space="preserve">
+    <value>Conteggio inventario</value>
+  </data>
+  <data name="NoCountsMessage" xml:space="preserve">
+    <value>Nessun inventario conta le informazioni disponibili.!</value>
+  </data>
 </root>

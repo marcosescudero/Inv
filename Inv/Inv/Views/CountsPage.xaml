@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:i18n="clr-namespace:Inv.Helpers"
+             x:Class="Inv.Views.CountsPage"
+            BindingContext="{Binding Main, Source={StaticResource Locator}}"
+            Title="{i18n:Translate InventoryCount}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="ic_action_add_circle" Command="{Binding AddCountCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout
+            BindingContext="{Binding Counts}"
+            Padding="5">
+            <SearchBar
+                HeightRequest="30"
+                Placeholder="{i18n:Translate Search}"
+                SearchCommand="{Binding SearchCommand}"
+                Text="{Binding Filter}">
+            </SearchBar>
+            <ListView
+                HasUnevenRows="True"
+                IsRefreshing="{Binding IsRefreshing}"
+                IsPullToRefreshEnabled="True"
+                ItemsSource="{Binding Counts}"
+                RefreshCommand="{Binding RefreshCommand}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="{i18n:Translate Edit}" Command="{Binding EditCountsCommand}"/>
+                                <MenuItem Text="{i18n:Translate Delete}" Command="{Binding DeleteCountCommand}" IsDestructive="True"/>
+                            </ViewCell.ContextActions>
+                            <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding EditCountCommand}"/>
+                                </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="0.5*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                    Grid.Column="0"
+                                    FontAttributes="Bold" 
+                                    Text="{Binding Item.Description}">
+                                </Label>
+                                <StackLayout
+                                    Grid.Column="1"
+                                    VerticalOptions="Center">
+                                    <Label
+                                        FontAttributes="Bold" 
+                                        Text="{Binding Location.Description}">
+                                    </Label>
+                                    <Label
+                                        Text="{Binding Bin.Description}">
+                                    </Label>
+                                </StackLayout>
+                                <Label
+                                    Grid.Column="2"
+                                    FontAttributes="Bold" 
+                                    Text="{Binding MeasureUnit.Description}">
+                                </Label>
+
+                                <Label
+                                    Grid.Column="3"
+                                    HorizontalOptions="End"
+                                    Text="{Binding Quantity}"
+                                    VerticalOptions="Center">
+                                </Label>
+                                <Image
+                                    Grid.Column="4"
+                                    Source="ic_chevron_right"
+                                    VerticalOptions="Center">
+                                </Image>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

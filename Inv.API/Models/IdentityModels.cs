@@ -29,5 +29,9 @@ namespace Inv.API.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Inv.Common.Models.Item> Items { get; set; }
+
+        public System.Data.Entity.DbSet<Inv.Common.Models.MeasureUnit> MeasureUnits { get; set; }
     }
 }

@@ -14,18 +14,17 @@ namespace Inv.Common.Models
         public int CountId { get; set; }
 
         [Display(Name = "Item")]
-        public int ItemId { get; set; }
+        public int? ItemId { get; set; }
 
         [Display(Name = "Location")]
-        public int LocationId { get; set; }
+        public int? LocationId { get; set; }
 
-        [Display(Name = "Bind")]
-        public int BinId { get; set; }
+        [Display(Name = "Bin")]
+        public int? BinId { get; set; }
 
         [Display(Name = "U.M.")]
-        public int MeasureUnitId { get; set; }
+        public int? MeasureUnitId { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
         public decimal Quantity { get; set; }
 
         [Display(Name = "Count Date")]
@@ -33,7 +32,9 @@ namespace Inv.Common.Models
         public DateTime CountDate { get; set; }
 
         public virtual Item Item { get; set; }
-        //public virtual Location Location { get; set; }
+        public virtual MeasureUnit MeasureUnit { get; set; }
+        public virtual Location Location { get; set; }
+        public virtual Bin Bin { get; set; }
 
     }
 }

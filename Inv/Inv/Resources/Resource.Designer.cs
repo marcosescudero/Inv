@@ -250,6 +250,15 @@ namespace Inv.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Inventory Count.
+        /// </summary>
+        public static string InventoryCount {
+            get {
+                return ResourceManager.GetString("InventoryCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Is Available ?.
         /// </summary>
         public static string IsAvailable {
@@ -291,6 +300,15 @@ namespace Inv.Resources {
         public static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Inventory counts information available..
+        /// </summary>
+        public static string NoCountsMessage {
+            get {
+                return ResourceManager.GetString("NoCountsMessage", resourceCulture);
             }
         }
         

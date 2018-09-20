@@ -7,7 +7,7 @@ namespace Inv.ViewModels
     public class MainViewModel
     {
         #region Properties
-
+        public CountsViewModel Counts { get; set; }
         #endregion
 
         #region Singleton

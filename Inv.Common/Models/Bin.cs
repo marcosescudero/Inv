@@ -1,8 +1,11 @@
 ﻿
 namespace Inv.Common.Models
 {
+    using Newtonsoft.Json;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public class Bin
     {
         [Key]
@@ -19,7 +22,7 @@ namespace Inv.Common.Models
 
         public virtual Location Location { get; set; }
 
-        //public virtual ICollection<Count> Counts { get; set; }
-
+        [JsonIgnore]
+        public virtual ICollection<Count> Counts { get; set; }
     }
 }

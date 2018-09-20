@@ -1,15 +1,17 @@
-﻿namespace Inv.Backend.Controllers
-{
-    using System;
-    using System.Data.Entity;
-    using System.Net;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-    using Backend.Helpers;
-    using Backend.Models;
-    using Common.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using Inv.Backend.Models;
+using Inv.Common.Models;
 
-    [Authorize]
+namespace Inv.Backend.Controllers
+{
     public class ItemsController : Controller
     {
         private LocalDataContext db = new LocalDataContext();
@@ -48,43 +50,17 @@
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(ItemView view)
+        public async Task<ActionResult> Create([Bind(Include = "ItemId,Barcode,Description,MeasureUnitId,IsAvailable")] Item item)
         {
             if (ModelState.IsValid)
             {
-                var pic = string.Empty;
-                var folder = "~/Content/Products";
-
-                if (view.ImageFile != null)
-                {
-                    pic = FilesHelper.UploadPhoto(view.ImageFile, folder);
-                    pic = $"{folder}/{pic}";
-                }
-
-                var item = this.ToItem(view, pic);
-
-                this.db.Items.Add(item);
+                db.Items.Add(item);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MeasureUnitId = new SelectList(db.MeasureUnits, "MeasureUnitId", "Description", view.MeasureUnitId);
-            return View(view);
-        }
-
-        private Item ToItem(ItemView view, string pic)
-        {
-            return new Item
-            {
-                Description = view.Description,
-                ImagePath = pic,
-                IsAvailable = view.IsAvailable,
-                Barcode = view.Barcode,
-                ItemId = view.ItemId,
-                MeasureUnit = view.MeasureUnit,
-                ImageArray = view.ImageArray,
-                MeasureUnitId = view.MeasureUnitId,
-            };
+            ViewBag.MeasureUnitId = new SelectList(db.MeasureUnits, "MeasureUnitId", "Description", item.MeasureUnitId);
+            return View(item);
         }
 
         // GET: Items/Edit/5
@@ -94,32 +70,13 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Item item = await this.db.Items.FindAsync(id);
+            Item item = await db.Items.FindAsync(id);
             if (item == null)
             {
                 return HttpNotFound();
             }
-
-
             ViewBag.MeasureUnitId = new SelectList(db.MeasureUnits, "MeasureUnitId", "Description", item.MeasureUnitId);
-
-            var view = this.ToView(item);
-            return View(view);
-        }
-
-        private ItemView ToView(Item item)
-        {
-            return new ItemView
-            {
-                Description = item.Description,
-                ImagePath = item.ImagePath,
-                IsAvailable = item.IsAvailable,
-                Barcode = item.Barcode,
-                ItemId = item.ItemId,
-                MeasureUnit = item.MeasureUnit,
-                ImageArray = item.ImageArray,
-                MeasureUnitId = item.MeasureUnitId,
-            };
+            return View(item);
         }
 
         // POST: Items/Edit/5
@@ -127,28 +84,16 @@
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(ItemView view)
+        public async Task<ActionResult> Edit([Bind(Include = "ItemId,Barcode,Description,MeasureUnitId,IsAvailable")] Item item)
         {
             if (ModelState.IsValid)
             {
-
-                var pic = view.ImagePath;
-                var folder = "~/Content/Products";
-
-                if (view.ImageFile != null)
-                {
-                    pic = FilesHelper.UploadPhoto(view.ImageFile, folder);
-                    pic = $"{folder}/{pic}";
-                }
-
-                var item = this.ToItem(view, pic);
-
                 db.Entry(item).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.MeasureUnitId = new SelectList(db.MeasureUnits, "MeasureUnitId", "Description", view.MeasureUnitId);
-            return View(view);
+            ViewBag.MeasureUnitId = new SelectList(db.MeasureUnits, "MeasureUnitId", "Description", item.MeasureUnitId);
+            return View(item);
         }
 
         // GET: Items/Delete/5

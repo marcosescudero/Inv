@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Inv.ViewModels;
+using Inv.Views;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +13,9 @@ namespace Inv
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            //MainPage = new MainPage();
+            MainViewModel.GetInstance().Counts = new CountsViewModel();
+            MainPage =  new NavigationPage(new CountsPage());
         }
 
         protected override void OnStart()

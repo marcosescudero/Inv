@@ -12,16 +12,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Item.Description)
+            @Html.DisplayNameFor(model => model.Bin.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LocationId)
+            @Html.DisplayNameFor(model => model.Item.Barcode)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BinId)
+            @Html.DisplayNameFor(model => model.Location.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MeasureUnitId)
+            @Html.DisplayNameFor(model => model.MeasureUnit.Description)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Quantity)
@@ -35,16 +35,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Item.Description)
+            @Html.DisplayFor(modelItem => item.Bin.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.LocationId)
+            @Html.DisplayFor(modelItem => item.Item.Barcode)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.BinId)
+            @Html.DisplayFor(modelItem => item.Location.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.MeasureUnitId)
+            @Html.DisplayFor(modelItem => item.MeasureUnit.Description)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Quantity)

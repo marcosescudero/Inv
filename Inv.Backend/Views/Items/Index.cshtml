@@ -1,61 +1,51 @@
 ﻿@model IEnumerable<Inv.Common.Models.Item>
 
 @{
-	ViewBag.Title = "Index";
+    ViewBag.Title = "Index";
 }
 
-<h2>Items</h2>
+<h2>Index</h2>
 
 <p>
-	@Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-	<tr>
-		<th>
-			@Html.DisplayNameFor(model => model.MeasureUnit.Description)
-		</th>
-		<th>
-			@Html.DisplayNameFor(model => model.Barcode)
-		</th>
-		<th>
-			@Html.DisplayNameFor(model => model.Description)
-		</th>
-		<th>
-			@Html.DisplayNameFor(model => model.ImagePath)
-		</th>
-		<th>
-			@Html.DisplayNameFor(model => model.IsAvailable)
-		</th>
-		<th></th>
-	</tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MeasureUnit.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Barcode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsAvailable)
+        </th>
+        <th></th>
+    </tr>
 
-	@foreach (var item in Model)
-	{
-		<tr>
-			<td>
-				@Html.DisplayFor(modelItem => item.MeasureUnit.Description)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.Barcode)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.Description)
-			</td>
-			<td>
-				@if (!string.IsNullOrEmpty(item.ImagePath))
-				{
-					<img src="@Url.Content(item.ImagePath)" alt="Image" style="width:100px;height:150px;max-width: 100%; height: auto;" />
-				}
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.IsAvailable)
-			</td>
-			<td>
-				@Html.ActionLink("Edit", "Edit", new { id = item.ItemId }) |
-				@Html.ActionLink("Details", "Details", new { id = item.ItemId }) |
-				@Html.ActionLink("Delete", "Delete", new { id = item.ItemId })
-			</td>
-		</tr>
-	}
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MeasureUnit.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Barcode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsAvailable)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ItemId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ItemId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ItemId })
+        </td>
+    </tr>
+}
 
 </table>

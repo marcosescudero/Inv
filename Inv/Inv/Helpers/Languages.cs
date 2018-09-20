@@ -207,6 +207,15 @@ namespace Inv.Helpers
         {
             get { return Resource.Exit; }
         }
+        
+        public static string InventoryCount
+        {
+            get { return Resource.InventoryCount; }
+        }
+        public static string NoCountsMessage
+        {
+            get { return Resource.NoCountsMessage; }
+        }
 
     }
 }

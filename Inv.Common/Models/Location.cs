@@ -1,5 +1,6 @@
 ﻿namespace Inv.Common.Models
 {
+    using Newtonsoft.Json;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     public class Location
@@ -11,8 +12,10 @@
         [StringLength(250)]
         public string Description { get; set; }
 
-        public virtual ICollection<Bin> Bins { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Bin> Bin { get; set; }
 
-        //public virtual ICollection<Count> Counts { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Count> Counts { get; set; }
     }
 }

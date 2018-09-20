@@ -1,5 +1,6 @@
 ﻿namespace Inv.Common.Models
 {
+    using Newtonsoft.Json;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
@@ -13,8 +14,11 @@
         [StringLength(250)]
         [Display(Name = "U.M. Description")]
         public string Description { get; set; }
-                
+
+        [JsonIgnore]
         public virtual ICollection<Item> Items { get; set; }
-        //public virtual ICollection<Count> Counts { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<Count> Counts { get; set; }
     }
 }
