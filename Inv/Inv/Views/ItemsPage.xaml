@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:i18n="clr-namespace:Inv.Helpers"             
+             x:Class="Inv.Views.ItemsPage"
+            BindingContext="{Binding Main, Source={StaticResource Locator}}"
+            Title="{i18n:Translate ItemsList}">
+    <ContentPage.Content>
+        <StackLayout
+            BindingContext="{Binding Items}"
+            Padding="5">
+            <SearchBar
+                HeightRequest="30"
+                Placeholder="{i18n:Translate Search}"
+                SearchCommand="{Binding SearchCommand}"
+                Text="{Binding Filter}">
+            </SearchBar>
+            <Frame OutlineColor="Black"
+                   Padding="5"
+                   HeightRequest="50">
+                <StackLayout
+                    Padding="5"
+                    Orientation="Horizontal">
+                    <Button Text="Info" 
+                        WidthRequest="80" 
+                        HorizontalOptions="StartAndExpand"
+                        Command="{Binding InfoCommand}">
+                    </Button>
+                    <Button Text="Scan >" 
+                            WidthRequest="80" 
+                            HorizontalOptions="EndAndExpand"
+                            Command="{Binding ScanCommand}">
+                    </Button>
+                </StackLayout>
+            </Frame>
+            <ListView
+                HasUnevenRows="True"
+                IsRefreshing="{Binding IsRefreshing}"
+                IsPullToRefreshEnabled="True"
+                ItemsSource="{Binding Items}"
+                RefreshCommand="{Binding RefreshCommand}">
+                <ListView.Footer>
+                    <Label Text="Grvppe Latam" />
+                </ListView.Footer>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding EditCountCommand}"/>
+                                </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                    Grid.Column="0"
+                                    FontAttributes="Bold" 
+                                    Text="{Binding ItemId}">
+                                </Label>
+                                <Label
+                                    Grid.Column="1"
+                                    FontAttributes="Bold" 
+                                    Text="{Binding Description}">
+                                </Label>
+                                <Image
+                                    Grid.Column="2"
+                                    Source="ic_chevron_right"
+                                    VerticalOptions="Center">
+                                </Image>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

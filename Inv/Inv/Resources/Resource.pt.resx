@@ -252,4 +252,7 @@
   <data name="NoCountsMessage" xml:space="preserve">
     <value>Nenhum estoque conta informações disponíveis.</value>
   </data>
+  <data name="ItemsList" xml:space="preserve">
+    <value>Lista de itens</value>
+  </data>
 </root>

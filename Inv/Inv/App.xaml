@@ -11,6 +11,7 @@
             <!-- Parameters -->
             <x:String x:Key="UrlAPI">http://200.55.241.235/InvAPI/</x:String>
             <x:String x:Key="UrlPrefix">/api</x:String>
+            <x:String x:Key="UrlItemsController">/Items</x:String>
             <x:String x:Key="UrlCountsController">/Counts</x:String>
         </ResourceDictionary>
     </Application.Resources>

@@ -216,6 +216,9 @@ namespace Inv.Helpers
         {
             get { return Resource.NoCountsMessage; }
         }
-
+        public static string ItemsList
+        {
+            get { return Resource.ItemsList; }
+        }
     }
 }

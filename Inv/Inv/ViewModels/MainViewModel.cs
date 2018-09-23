@@ -7,6 +7,7 @@ namespace Inv.ViewModels
     public class MainViewModel
     {
         #region Properties
+        public ItemsViewModel Items { get; set; }
         public CountsViewModel Counts { get; set; }
         #endregion
 

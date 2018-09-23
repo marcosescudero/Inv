@@ -268,6 +268,15 @@ namespace Inv.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Items List.
+        /// </summary>
+        public static string ItemsList {
+            get {
+                return ResourceManager.GetString("ItemsList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string Login {

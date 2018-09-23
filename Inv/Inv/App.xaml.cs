@@ -13,9 +13,11 @@ namespace Inv
         {
             InitializeComponent();
 
+            //var mainViewModel = MainViewModel.GetInstance();
             //MainPage = new MainPage();
-            MainViewModel.GetInstance().Counts = new CountsViewModel();
-            MainPage =  new NavigationPage(new CountsPage());
+            MainViewModel.GetInstance().Items = new ItemsViewModel();
+            MainPage =  new NavigationPage(new ItemsPage());
+            //this.MainPage = new NavigationPage(new LoginPage());
         }
 
         protected override void OnStart()
