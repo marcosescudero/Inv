@@ -8,6 +8,7 @@
     using Common.Models;
     using GalaSoft.MvvmLight.Command;
     using Inv.Helpers;
+    using Inv.Models;
     using Services;
     using Xamarin.Forms;
 
@@ -27,6 +28,7 @@
 
         #region Properties
         public List<Item> MyItems { get; set; }
+        public List<ItemLocal> MySqliteItems { get; set; }
 
         public ObservableCollection<ItemItemViewModel> Items
         {
@@ -82,7 +84,7 @@
                 var answer = await this.LoadItemsFromAPI();
                 if (answer)
                 {
-                    //this.SaveItemsToDB();
+                    this.SaveItemsToDB();
                 }
             } else
             {
@@ -115,18 +117,38 @@
                 return false;
             }
             this.MyItems = (List<Item>)response.Result; // hay que castearlo
+            this.MySqliteItems = this.MyItems.Select(P => new ItemLocal
+            {
+                Barcode = P.Barcode,
+                ItemId = P.ItemId,
+                Description = P.Description,
+                IsAvailable = P.IsAvailable,
+                MeasureUnitId = P.MeasureUnitId,
+            }).ToList();
             return true;
         }
 
-        private async void SaveItemsToDB()
+        private async Task SaveItemsToDB()
         {
             await this.dataService.DeleteAllItems();
-            this.dataService.Insert(this.MyItems); // Nota: En este método no necesitamos el await.
+
+            this.dataService.Insert(this.MySqliteItems); // Nota: En este método no necesitamos el await.
+            //this.dataService.Insert(this.MyItems); // Nota: En este método no necesitamos el await.
         }
 
         private async Task LoadItemsFromDB()
         {
-            this.MyItems = await this.dataService.GetAllItems();
+            this.MySqliteItems = await this.dataService.GetAllItems();
+
+            this.MyItems = this.MySqliteItems.Select(p => new Item
+            {
+                ItemId = p.ItemId,
+                Barcode = p.Barcode,
+                Description = p.Description,
+                IsAvailable = p.IsAvailable,
+                MeasureUnitId = p.MeasureUnitId,
+            }).ToList();
+            //this.MyItems = await this.dataService.GetAllItems();
         }
 
 
@@ -137,7 +159,6 @@
             if (string.IsNullOrEmpty(this.Filter))
             {
                 // Expresion Lamda (ALTA PERFORMANCE)
-                
                 var myListItemItemViewModel = this.MyItems.Select(p => new ItemItemViewModel
                 {
                     ItemId = p.ItemId,
@@ -161,7 +182,6 @@
                 }).Where(p => p.Description.ToLower().Contains(this.Filter.ToLower())).ToList();
                 this.Items = new ObservableCollection<ItemItemViewModel>(
                     myListItemItemViewModel.OrderBy(p => p.Description));
-
             }
         }
         #endregion

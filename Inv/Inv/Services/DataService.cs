@@ -1,12 +1,15 @@
 ﻿namespace Inv.Services
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using Common.Models;
     using Interfaces;
+    using Inv.Models;
     using SQLite;
     using Xamarin.Forms;
+    
 
     public class DataService
     {
@@ -26,7 +29,7 @@
         {
             var databasePath = DependencyService.Get<IPathService>().GetDatabasePath();
             this.connection = new SQLiteAsyncConnection(databasePath);
-            await connection.CreateTableAsync<Item>().ConfigureAwait(false);
+            await connection.CreateTableAsync<ItemLocal>().ConfigureAwait(false);
         }
 
         public async Task Insert<T>(T model)
@@ -54,25 +57,34 @@
             await this.connection.DeleteAsync(model);
         }
 
-        public async Task<List<Item>> GetAllItems()
+        public async Task<List<ItemLocal>> GetAllItems()
         {
-            var query = await this.connection.QueryAsync<Item>("select * from [Item]");
-            var array = query.ToArray();
-            var list = array.Select(p => new Item
+            try
             {
-                ItemId = p.ItemId,
-                Barcode = p.Barcode,
-                Description = p.Description,
-                IsAvailable = p.IsAvailable,
-                MeasureUnitId = p.MeasureUnitId,
-            }).ToList();
-            return list;
+                var query = await this.connection.QueryAsync<ItemLocal>("select * from [Item]");
+                var array = query.ToArray();
+                var list = array.Select(p => new ItemLocal
+                {
+                    ItemId = p.ItemId,
+                    Barcode = p.Barcode,
+                    Description = p.Description,
+                    IsAvailable = p.IsAvailable,
+                    MeasureUnitId = p.MeasureUnitId,
+                }).ToList();
+                return list;
+            }
+            catch (Exception e)
+            {
+                var errormessage = e.Message.ToString();
+                return null;
+            }
         }
 
         public async Task DeleteAllItems()
         {
             var query = await this.connection.QueryAsync<Item>("delete from [Item]");
-        } 
+        }
+
         #endregion
     }
 }

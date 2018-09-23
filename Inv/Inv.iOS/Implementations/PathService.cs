@@ -14,7 +14,7 @@ namespace Inv.iOS.Implementations
             {
                 Directory.CreateDirectory(libFolder);
             }
-            return Path.Combine(libFolder, "Inv.db3");
+            return Path.Combine(libFolder, "Inventory.db3");
         }
     }
 }

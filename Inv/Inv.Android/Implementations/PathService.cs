@@ -10,7 +10,7 @@ namespace Inv.Droid.Implementations
         public string GetDatabasePath()
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            return Path.Combine(path, "Inv.db3");
+            return Path.Combine(path, "Inventory.db3");
         }
     }
 }
