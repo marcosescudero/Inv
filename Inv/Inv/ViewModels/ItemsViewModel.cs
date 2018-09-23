@@ -1,6 +1,5 @@
 ﻿namespace Inv.ViewModels
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -23,13 +22,13 @@
         private string filter;
         private bool isRefreshing;
         //private ObservableCollection<CountItemViewModel> products;
-        private ObservableCollection<Item> items;
+        private ObservableCollection<ItemItemViewModel> items;
         #endregion
 
         #region Properties
         public List<Item> MyItems { get; set; }
 
-        public ObservableCollection<Item> Items
+        public ObservableCollection<ItemItemViewModel> Items
         {
             get { return this.items; }
             set { SetValue(ref this.items, value); }
@@ -83,7 +82,7 @@
                 var answer = await this.LoadItemsFromAPI();
                 if (answer)
                 {
-                    this.SaveItemsToDB();
+                    //this.SaveItemsToDB();
                 }
             } else
             {
@@ -138,45 +137,31 @@
             if (string.IsNullOrEmpty(this.Filter))
             {
                 // Expresion Lamda (ALTA PERFORMANCE)
-                /*
-                var myListProductItemViewModel = this.MyProducts.Select(p => new ProductItemViewModel
+                
+                var myListItemItemViewModel = this.MyItems.Select(p => new ItemItemViewModel
                 {
+                    ItemId = p.ItemId,
                     Description = p.Description,
-                    ImageArray = p.ImageArray,
-                    ImagePath = p.ImagePath,
                     IsAvailable = p.IsAvailable,
-                    Price = p.Price,
-                    ProductId = p.ProductId,
-                    PublishOn = p.PublishOn,
-                    Remarks = p.Remarks,
+                    Barcode = p.Barcode,
+                    MeasureUnitId = p.MeasureUnitId,
                 });
-                */
-                this.Items = new ObservableCollection<Item>(
-                    MyItems.OrderBy(p => p.Description));
+                this.Items = new ObservableCollection<ItemItemViewModel>(
+                    myListItemItemViewModel.OrderBy(p => p.Description));
             }
             else
             {
-                /*
-                var myListProductItemViewModel = this.MyProducts.Select(p => new ProductItemViewModel
+                var myListItemItemViewModel = this.MyItems.Select(p => new ItemItemViewModel
                 {
+                    ItemId = p.ItemId,
                     Description = p.Description,
-                    ImageArray = p.ImageArray,
-                    ImagePath = p.ImagePath,
                     IsAvailable = p.IsAvailable,
-                    Price = p.Price,
-                    ProductId = p.ProductId,
-                    PublishOn = p.PublishOn,
-                    Remarks = p.Remarks,
+                    Barcode = p.Barcode,
+                    MeasureUnitId = p.MeasureUnitId,
                 }).Where(p => p.Description.ToLower().Contains(this.Filter.ToLower())).ToList();
+                this.Items = new ObservableCollection<ItemItemViewModel>(
+                    myListItemItemViewModel.OrderBy(p => p.Description));
 
-                this.Products = new ObservableCollection<ProductItemViewModel>(
-                    myListProductItemViewModel.OrderBy(p => p.Description));
-                */
-                this.Items = new ObservableCollection<Item>(
-                    MyItems
-                    .Where(p => p.Description.ToLower().Contains(this.Filter.ToLower()))
-                    .OrderBy(p => p.Description));
-                
             }
         }
         #endregion
@@ -198,6 +183,5 @@
         }
 
         #endregion
-
     }
 }
