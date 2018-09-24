@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:i18n="clr-namespace:Inv.Helpers"             
              x:Class="Inv.Views.ItemsPage"
-            BindingContext="{Binding Main, Source={StaticResource Locator}}"
-            Title="{i18n:Translate ItemsList}">
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="{i18n:Translate ItemsList}">
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Items}"

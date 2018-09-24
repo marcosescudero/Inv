@@ -108,7 +108,8 @@
             Settings.IsRemembered = this.IsRemembered;
 
             MainViewModel.GetInstance().Items = new ItemsViewModel();
-            Application.Current.MainPage = new NavigationPage(new ItemsPage());
+            //Application.Current.MainPage = new NavigationPage(new ItemsPage());
+            Application.Current.MainPage = new MasterPage();
 
             this.IsRunning = false;
             this.IsEnabled = true;

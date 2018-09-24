@@ -110,7 +110,7 @@
             var controller = Application.Current.Resources["UrlItemsController"].ToString(); // Obtengo el controlador del diccionario de recursos.
 
             //var response = await this.apiService.GetList<Item>(url, prefix, controller);
-            var response = await this.apiService.GetList<Count>(url, prefix, controller, Settings.TokenType, Settings.AccessToken);
+            var response = await this.apiService.GetList<Item>(url, prefix, controller, Settings.TokenType, Settings.AccessToken);
 
 
             if (!response.IsSuccess)

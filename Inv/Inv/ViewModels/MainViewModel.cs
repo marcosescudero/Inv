@@ -1,9 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Inv.ViewModels
+﻿namespace Inv.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Text;
+    using Helpers;
+
     public class MainViewModel
     {
         #region Atributes
@@ -11,7 +13,7 @@ namespace Inv.ViewModels
         #endregion
 
         #region Properties
-
+        public ObservableCollection<MenuItemViewModel> Menu { get; set; }
         #endregion
 
         #region ViewModels
@@ -36,8 +38,33 @@ namespace Inv.ViewModels
         public MainViewModel()
         {
             instance = this;
-            //this.Login = new LoginViewModel();
+            this.LoadMenu();
         }
+
+        private void LoadMenu()
+        {
+            this.Menu = new ObservableCollection<MenuItemViewModel>();
+            this.Menu.Add(new MenuItemViewModel
+            {
+                Icon = "ic_info",
+                PageName = "AboutPage",
+                Title = Languages.About,
+            });
+            this.Menu.Add(new MenuItemViewModel
+            {
+                Icon = "ic_phonelink_setup",
+                PageName = "SetupPage",
+                Title = Languages.Setup,
+            });
+            this.Menu.Add(new MenuItemViewModel
+            {
+                Icon = "ic_exit_to_app",
+                PageName = "LoginPage",
+                Title = Languages.Exit,
+            });
+        }
+
+
         #endregion
     }
 }

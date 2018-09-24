@@ -21,8 +21,8 @@ namespace Inv.API.Controllers
         // GET: api/Counts
         public IQueryable<Count> GetCounts()
         {
-            return NotFound();
-                // db.Counts;
+            return //NotFound();
+                 db.Counts;
                 /*
                 .Include(i => i.Item)
                 .Include(i => i.Location)
