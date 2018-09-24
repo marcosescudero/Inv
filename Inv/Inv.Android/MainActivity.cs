@@ -12,8 +12,8 @@ namespace Inv.Droid
     [Activity(
         Label = "Inv", 
         Icon = "@mipmap/icon", 
-        Theme = "@style/MainTheme", 
-        MainLauncher = true, 
+        Theme = "@style/MainTheme",
+        MainLauncher = false,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {

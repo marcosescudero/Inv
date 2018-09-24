@@ -1,4 +1,7 @@
-﻿using Inv.ViewModels;
+﻿using Inv.Common.Models;
+using Inv.Helpers;
+using Inv.Services;
+using Inv.ViewModels;
 using Inv.Views;
 using System;
 using Xamarin.Forms;
@@ -16,11 +19,29 @@ namespace Inv
             InitializeComponent();
 
             var mainViewModel = MainViewModel.GetInstance();
-            //mainViewModel.Items = new ItemsViewModel();
-            //MainPage =  new NavigationPage(new ItemsPage());
 
-            mainViewModel.Login = new LoginViewModel();
-            MainPage = new NavigationPage(new LoginPage());
+            if (Settings.IsRemembered)
+            {
+                DateTime expireDate;
+                if (!DateTime.TryParse(Settings.TokenExpires, out expireDate))
+                {
+                    // handle parse failure
+                    expireDate = DateTime.Parse("Mon, 01 Jan 2018 12:00:00 GMT");
+                }
+                if (Settings.AccessToken != null && expireDate > DateTime.Now)
+                {
+                    mainViewModel.Items = new ItemsViewModel();
+                    this.MainPage = new MasterPage();
+                } else
+                {
+                    mainViewModel.Login = new LoginViewModel();
+                    MainPage = new NavigationPage(new LoginPage());
+                }
+            } else
+            {
+                mainViewModel.Login = new LoginViewModel();
+                MainPage = new NavigationPage(new LoginPage());
+            }
         }
 
         protected override void OnStart()

@@ -9,11 +9,15 @@
 
     public class LoginViewModel : BaseViewModel
     {
+
         #region Attributes
-        private ApiService apiService;
         private bool isRunning;
         private bool isEnabled;
+        #endregion
 
+        #region Services
+        private ApiService apiService;
+        private DataService dataService;
         #endregion
 
         #region Properties
@@ -37,6 +41,8 @@
         public LoginViewModel()
         {
             this.apiService = new ApiService();
+            this.dataService = new DataService();
+
             this.IsEnabled = true;
             this.IsRemembered = true;
         }
@@ -105,6 +111,8 @@
 
             Settings.TokenType = token.TokenType;
             Settings.AccessToken = token.AccessToken;
+            Settings.TokenExpires = token.Expires.ToString();
+
             Settings.IsRemembered = this.IsRemembered;
 
             MainViewModel.GetInstance().Items = new ItemsViewModel();
