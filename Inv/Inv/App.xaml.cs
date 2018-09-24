@@ -13,11 +13,12 @@ namespace Inv
         {
             InitializeComponent();
 
-            //var mainViewModel = MainViewModel.GetInstance();
-            //MainPage = new MainPage();
-            MainViewModel.GetInstance().Items = new ItemsViewModel();
-            MainPage =  new NavigationPage(new ItemsPage());
-            //this.MainPage = new NavigationPage(new LoginPage());
+            var mainViewModel = MainViewModel.GetInstance();
+            //mainViewModel.Items = new ItemsViewModel();
+            //MainPage =  new NavigationPage(new ItemsPage());
+
+            mainViewModel.Login = new LoginViewModel();
+            MainPage = new NavigationPage(new LoginPage());
         }
 
         protected override void OnStart()

@@ -3,6 +3,7 @@
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using Helpers;
+    using Inv.Views;
     using Services;
     using Xamarin.Forms;
 
@@ -102,9 +103,15 @@
                 return;
             }
 
+            Settings.TokenType = token.TokenType;
+            Settings.AccessToken = token.AccessToken;
+            Settings.IsRemembered = this.IsRemembered;
+
+            MainViewModel.GetInstance().Items = new ItemsViewModel();
+            Application.Current.MainPage = new NavigationPage(new ItemsPage());
+
             this.IsRunning = false;
             this.IsEnabled = true;
-            await Application.Current.MainPage.DisplayAlert("ok", "Yeah...!!", Languages.Accept);
 
         }
         #endregion

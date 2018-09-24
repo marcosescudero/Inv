@@ -20,28 +20,6 @@
          * La clase Task es la encargada de ejecutar una o varias tareas fuera del hilo que 
          * la ejecuta creando ésta un Thread propio para evitar congelar la interfaz del usuario.
          */
-
-        public async Task<TokenResponse> GetToken(string urlBase, string username, string password)
-        {
-            try
-            {
-                var client = new HttpClient();
-                client.BaseAddress = new Uri(urlBase);
-                var response = await client.PostAsync("Token",
-                    new StringContent(string.Format(
-                    "grant_type=password&username={0}&password={1}",
-                    username, password),
-                    Encoding.UTF8, "application/x-www-form-urlencoded"));
-                var resultJSON = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<TokenResponse>(
-                    resultJSON);
-                return result;
-            }
-            catch
-            {
-                return null;
-            }
-        }
         public async Task<Response> CheckConnection()
         {
             if (!CrossConnectivity.Current.IsConnected)
@@ -68,14 +46,35 @@
                 IsSuccess = true,
             };
         }
-        // La clase Response, como es una clase que usaremos transversalmente, no la crearemos aquí, sino que la crearemos en Inv.Common.Models
+        public async Task<TokenResponse> GetToken(string urlBase, string username, string password)
+        {
+            try
+            {
+                var client = new HttpClient();
+                client.BaseAddress = new Uri(urlBase);
+                var response = await client.PostAsync("Token",
+                    new StringContent(string.Format(
+                    "grant_type=password&username={0}&password={1}",
+                    username, password),
+                    Encoding.UTF8, "application/x-www-form-urlencoded"));
+                var resultJSON = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<TokenResponse>(
+                    resultJSON);
+                return result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        // La clase Response, como es una clase que usaremos transversalmente, no la crearemos aquí, sino que la crearemos en Sales.Common.Models
         public async Task<Response> GetList<T>(string urlBase, string prefix, string controller)
         {
             try
             {
                 var client = new HttpClient();
                 //client.BaseAddress = new Uri(urlBase);
-                var url2 = new Uri(string.Format("{0}{1}{2}", urlBase, prefix, controller)); // ME - tengo que hacer esto por que no me toma 'InvAPI' en la urlBase nio en el prefix
+                var url2 = new Uri(string.Format("{0}{1}{2}", urlBase, prefix, controller)); // ME - tengo que hacer esto por que no me toma 'SalesAPI' en la urlBase nio en el prefix
                 var url = $"{prefix}{controller}"; // Esto concatena. Es equivalente al String.format
                 var response = await client.GetAsync(url2);
                 var answer = await response.Content.ReadAsStringAsync(); // Aqui tenemos todo el json, pero en formato string. Hay que desserializarlo.
@@ -111,7 +110,7 @@
                 var client = new HttpClient();
                 //cliente.BaseAddress = new Uri(urlBase);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
-                var url2 = new Uri(string.Format("{0}{1}{2}", urlBase, prefix, controller)); // ME - tengo que hacer esto por que no me toma 'InvAPI' en la urlBase nio en el prefix
+                var url2 = new Uri(string.Format("{0}{1}{2}", urlBase, prefix, controller)); // ME - tengo que hacer esto por que no me toma 'SalesAPI' en la urlBase no en el prefix
 
                 var url = $"{prefix}{controller}"; // Esto concatena. Es equivalente al String.format
                 var response = await client.GetAsync(url2);
@@ -150,7 +149,7 @@
                 var client = new HttpClient();
                 //client.BaseAddress = new Uri(urlBase);
                 var url = $"{prefix}{controller}";
-                var url2 = new Uri(string.Format("{0}{1}{2}", urlBase, prefix, controller)); // ME - tengo que hacer esto por que no me toma 'InvAPI' en la urlBase nio en el prefix
+                var url2 = new Uri(string.Format("{0}{1}{2}", urlBase, prefix, controller)); // ME - tengo que hacer esto por que no me toma 'SalesAPI' en la urlBase nio en el prefix
                 var response = await client.PostAsync(url2, content);
                 var answer = await response.Content.ReadAsStringAsync();
                 if (!response.IsSuccessStatusCode)
@@ -188,7 +187,7 @@
                 //client.BaseAddress = new Uri(urlBase);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
                 var url = $"{prefix}{controller}";
-                var url2 = new Uri(string.Format("{0}{1}{2}", urlBase, prefix, controller)); // ME - tengo que hacer esto por que no me toma 'InvAPI' en la urlBase nio en el prefix
+                var url2 = new Uri(string.Format("{0}{1}{2}", urlBase, prefix, controller)); // ME - tengo que hacer esto por que no me toma 'SalesAPI' en la urlBase nio en el prefix
                 var response = await client.PostAsync(url2, content);
                 var answer = await response.Content.ReadAsStringAsync();
                 if (!response.IsSuccessStatusCode)
@@ -225,7 +224,7 @@
                 var client = new HttpClient();
                 //client.BaseAddress = new Uri(urlBase);
                 var url = $"{prefix}{controller}/{id}";
-                var url2 = new Uri(string.Format("{0}{1}{2}/{3}", urlBase, prefix, controller, id)); // ME - tengo que hacer esto por que no me toma 'InvAPI' en la urlBase nio en el prefix
+                var url2 = new Uri(string.Format("{0}{1}{2}/{3}", urlBase, prefix, controller, id)); // ME - tengo que hacer esto por que no me toma 'SalesAPI' en la urlBase nio en el prefix
                 var response = await client.PutAsync(url2, content);
                 var answer = await response.Content.ReadAsStringAsync();
                 if (!response.IsSuccessStatusCode)
@@ -263,7 +262,7 @@
                 //client.BaseAddress = new Uri(urlBase);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
                 var url = $"{prefix}{controller}/{id}";
-                var url2 = new Uri(string.Format("{0}{1}{2}/{3}", urlBase, prefix, controller, id)); // ME - tengo que hacer esto por que no me toma 'InvAPI' en la urlBase nio en el prefix
+                var url2 = new Uri(string.Format("{0}{1}{2}/{3}", urlBase, prefix, controller, id)); // ME - tengo que hacer esto por que no me toma 'SalesAPI' en la urlBase nio en el prefix
                 var response = await client.PutAsync(url2, content);
                 var answer = await response.Content.ReadAsStringAsync();
                 if (!response.IsSuccessStatusCode)
@@ -298,7 +297,7 @@
                 var client = new HttpClient();
                 //client.BaseAddress = new Uri(urlBase);
                 var url = $"{prefix}{controller}/{id}"; // Esto concatena. Es equivalente al String.format
-                var url2 = new Uri(string.Format("{0}{1}{2}/{3}", urlBase, prefix, controller, id)); // ME - tengo que hacer esto por que no me toma 'InvAPI' en la urlBase nio en el prefix
+                var url2 = new Uri(string.Format("{0}{1}{2}/{3}", urlBase, prefix, controller, id)); // ME - tengo que hacer esto por que no me toma 'SalesAPI' en la urlBase nio en el prefix
                 var response = await client.DeleteAsync(url2);
                 var answer = await response.Content.ReadAsStringAsync(); // Aqui tenemos todo el json, pero en formato string. Hay que desserializarlo.
                 if (!response.IsSuccessStatusCode)
@@ -332,7 +331,7 @@
                 //cliente.BaseAddress = new Uri(urlBase);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
                 var url = $"{prefix}{controller}/{id}"; // Esto concatena. Es equivalente al String.format
-                var url2 = new Uri(string.Format("{0}{1}{2}/{3}", urlBase, prefix, controller, id)); // ME - tengo que hacer esto por que no me toma 'InvAPI' en la urlBase nio en el prefix
+                var url2 = new Uri(string.Format("{0}{1}{2}/{3}", urlBase, prefix, controller, id)); // ME - tengo que hacer esto por que no me toma 'SalesAPI' en la urlBase nio en el prefix
                 var response = await client.DeleteAsync(url2);
                 var answer = await response.Content.ReadAsStringAsync(); // Aqui tenemos todo el json, pero en formato string. Hay que desserializarlo.
                 if (!response.IsSuccessStatusCode)
@@ -358,7 +357,53 @@
                 };
             }
         }
-    }
+        /*
+        public async Task<Response> GetUser(string urlBase, string prefix, string controller, string email, string tokenType, string accessToken)
+        {
+            try
+            {
+                var getUserRequest = new GetUserRequest
+                {
+                    Email = email,
+                };
 
+                var request = JsonConvert.SerializeObject(getUserRequest);
+                var content = new StringContent(request, Encoding.UTF8, "application/json");
+
+                var client = new HttpClient();
+                //client.BaseAddress = new Uri(urlBase);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
+                var url = $"{prefix}{controller}";
+                var url2 = new Uri(string.Format("{0}{1}{2}", urlBase, prefix, controller)); // ME - tengo que hacer esto por que no me toma 'SalesAPI' en la urlBase no en el prefix
+                var response = await client.PostAsync(url2, content);
+                var answer = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = answer,
+                    };
+                }
+
+                var user = JsonConvert.DeserializeObject<MyUserASP>(answer);
+                return new Response
+                {
+                    IsSuccess = true,
+                    Result = user,
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
+                };
+            }
+        }
+        */
+
+    }
 }
 

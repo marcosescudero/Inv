@@ -6,9 +6,18 @@ namespace Inv.ViewModels
 {
     public class MainViewModel
     {
+        #region Atributes
+
+        #endregion
+
         #region Properties
+
+        #endregion
+
+        #region ViewModels
         public ItemsViewModel Items { get; set; }
         public CountsViewModel Counts { get; set; }
+        public LoginViewModel Login {get; set; }
         #endregion
 
         #region Singleton
@@ -27,6 +36,7 @@ namespace Inv.ViewModels
         public MainViewModel()
         {
             instance = this;
+            //this.Login = new LoginViewModel();
         }
         #endregion
     }
