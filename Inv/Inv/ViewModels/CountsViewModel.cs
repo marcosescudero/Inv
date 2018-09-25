@@ -66,6 +66,7 @@ namespace Inv.ViewModels
         {
             instance = this;
             this.apiService = new ApiService();
+            this.Item = item;
             this.LoadCounts();
             this.IsRefreshing = false;
         }
@@ -89,6 +90,7 @@ namespace Inv.ViewModels
             {
                 this.IsRefreshing = false;
                 await Application.Current.MainPage.DisplayAlert(Languages.Error, Languages.NoCountsMessage, Languages.Accept);
+                await App.Navigator.PopAsync();
                 return;
             }
 
@@ -112,13 +114,14 @@ namespace Inv.ViewModels
                 return false;
             }
             this.MyCounts = (List<Count>) response.Result; // hay que castearlo
+            if (Item != null)
+                this.MyCounts = this.MyCounts.Where(p => p.ItemId == this.Item.ItemId).ToList();
+
             return true;
         }
 
         public void RefreshList()
         {
-            if (Item != null)
-                this.MyCounts = this.MyCounts.Where(p => p.ItemId == this.Item.ItemId).ToList();
             this.Counts = new ObservableCollection<Count>(this.MyCounts);
         }
 
