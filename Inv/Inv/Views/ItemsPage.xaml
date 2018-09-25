@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:i18n="clr-namespace:Inv.Helpers"             
              x:Class="Inv.Views.ItemsPage"
+             BackgroundColor="{StaticResource Primary_Light}"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="{i18n:Translate ItemsList}">
     <ContentPage.Content>
@@ -15,19 +16,28 @@
                 SearchCommand="{Binding SearchCommand}"
                 Text="{Binding Filter}">
             </SearchBar>
-            <Frame OutlineColor="Black"
+            <Frame BackgroundColor="{StaticResource Primary_Light}"
+                OutlineColor="{StaticResource Divider}"
                    Padding="5"
                    HeightRequest="50">
                 <StackLayout
                     Padding="5"
                     Orientation="Horizontal">
                     <Button Text="Info" 
+                            BackgroundColor="{StaticResource Primary}"
+                            TextColor="{StaticResource Icons}"
+                            HeightRequest="46"
+                            BorderRadius="23"
                         WidthRequest="80" 
                         HorizontalOptions="StartAndExpand"
                         Command="{Binding InfoCommand}">
                     </Button>
                     <Button Text="Scan >" 
+                            BackgroundColor="{StaticResource Accent}"
+                            TextColor="{StaticResource Icons}"
                             WidthRequest="80" 
+                            HeightRequest="46"
+                            BorderRadius="23"
                             HorizontalOptions="EndAndExpand"
                             Command="{Binding ScanCommand}">
                     </Button>
@@ -57,12 +67,14 @@
                                 <Label
                                     Grid.Column="0"
                                     FontAttributes="Bold" 
-                                    Text="{Binding ItemId}">
+                                    Text="{Binding ItemId}"
+                                    TextColor="{StaticResource FontColor}">
                                 </Label>
                                 <Label
                                     Grid.Column="1"
                                     FontAttributes="Bold" 
-                                    Text="{Binding Description}">
+                                    Text="{Binding Description}"
+                                    TextColor="{StaticResource FontColor}">
                                 </Label>
                                 <Image
                                     Grid.Column="2"

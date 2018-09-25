@@ -4,14 +4,14 @@
              xmlns:i18n="clr-namespace:Inv.Helpers"
              x:Class="Inv.Views.MenuPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             BackgroundColor="Gray"
+             BackgroundColor="{StaticResource MenuColor}"
              Title="{i18n:Translate Menu}">
     <ContentPage.Content>
         <StackLayout
             Padding="5,20,5,5">
             <Image
                 Source="menu"
-                WidthRequest="100">
+                WidthRequest="150">
             </Image>
             <ListView
             	ItemsSource="{Binding Menu}"
@@ -37,7 +37,7 @@
                                 <Label
                                 	Grid.Column="1"
                                 	VerticalOptions="Center"
-                                	TextColor="White"
+                                	TextColor="{StaticResource MenuFontColor}"
                                 	Text="{Binding Title}">
                                 </Label>
                             </Grid>
