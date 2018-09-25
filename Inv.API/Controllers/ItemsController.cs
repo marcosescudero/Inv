@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Http.Description;
-using Inv.Common.Models;
-using Inv.Domain.Models;
-
-namespace Inv.API.Controllers
+﻿namespace Inv.API.Controllers
 {
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    using System.Linq;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web.Http;
+    using System.Web.Http.Description;
+    using Inv.Common.Models;
+    using Inv.Domain.Models;
+
     public class ItemsController : ApiController
     {
         private DataContext db = new DataContext();
@@ -22,7 +18,8 @@ namespace Inv.API.Controllers
         public IQueryable<Item> GetItems()
         {
             return db.Items
-                .Include(b => b.MeasureUnit);
+                .Include(b => b.MeasureUnit)
+                .Include(b => b.Counts);
         }
 
         // GET: api/Items/5

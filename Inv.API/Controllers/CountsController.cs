@@ -21,14 +21,13 @@ namespace Inv.API.Controllers
         // GET: api/Counts
         public IQueryable<Count> GetCounts()
         {
-            return //NotFound();
-                 db.Counts;
-                /*
+            return 
+                 db.Counts
                 .Include(i => i.Item)
                 .Include(i => i.Location)
                 .Include(i => i.Bin)
                 .Include(i => i.MeasureUnit);
-                */
+                
         }
 
         // GET: api/Counts/5
@@ -43,6 +42,26 @@ namespace Inv.API.Controllers
                 .Include(i => i.MeasureUnit)
                 .FirstOrDefaultAsync(i => i.CountId == id);
 
+
+            if (count == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(count);
+        }
+
+        // GET: api/Counts/5
+        [ResponseType(typeof(Count))]
+        public async Task<IHttpActionResult> GetCount(int id, int ItemId)
+        {
+            //Count count = await db.Counts.FindAsync(id);
+            Count count = await db.Counts
+                .Include(i => i.Item)
+                .Include(i => i.Location)
+                .Include(i => i.Bin)
+                .Include(i => i.MeasureUnit)
+                .FirstOrDefaultAsync(i => i.ItemId == ItemId);
 
             if (count == null)
             {

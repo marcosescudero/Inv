@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace Inv.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class CountItemPage : ContentPage
+	public partial class EditCountPage : ContentPage
 	{
-		public CountItemPage ()
+		public EditCountPage ()
 		{
 			InitializeComponent ();
 		}

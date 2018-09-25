@@ -3,6 +3,7 @@ namespace Inv.ViewModels
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Input;
     using Common.Models;
@@ -14,9 +15,9 @@ namespace Inv.ViewModels
     public class CountsViewModel : BaseViewModel
     {
         #region Attributes
-        private string filter;
         private ApiService apiService;
         private bool isRefreshing;
+        private Item item;
         //private ObservableCollection<CountItemViewModel> products;
         private ObservableCollection<Count> counts;
         #endregion
@@ -34,6 +35,11 @@ namespace Inv.ViewModels
             get { return this.isRefreshing; }
             set { SetValue(ref this.isRefreshing, value); }
         }
+        public Item Item
+        {
+            get { return this.item; }
+            set { SetValue(ref this.item, value); }
+        }
         #endregion
 
         #region Singleton
@@ -50,6 +56,13 @@ namespace Inv.ViewModels
 
         #region Constructors
         public CountsViewModel()
+        {
+            instance = this;
+            this.apiService = new ApiService();
+            this.LoadCounts();
+            this.IsRefreshing = false;
+        }
+        public CountsViewModel(Item item)
         {
             instance = this;
             this.apiService = new ApiService();
@@ -104,6 +117,8 @@ namespace Inv.ViewModels
 
         public void RefreshList()
         {
+            if (Item != null)
+                this.MyCounts = this.MyCounts.Where(p => p.ItemId == this.Item.ItemId).ToList();
             this.Counts = new ObservableCollection<Count>(this.MyCounts);
         }
 

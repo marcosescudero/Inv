@@ -17,9 +17,10 @@
         #endregion
 
         #region ViewModels
+        public LoginViewModel Login { get; set; }
         public ItemsViewModel Items { get; set; }
         public CountsViewModel Counts { get; set; }
-        public LoginViewModel Login {get; set; }
+        public EditCountViewModel EditCount { get; set; }
         #endregion
 
         #region Singleton
