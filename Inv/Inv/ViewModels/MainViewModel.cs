@@ -21,6 +21,7 @@
         public ItemsViewModel Items { get; set; }
         public CountsViewModel Counts { get; set; }
         public EditCountViewModel EditCount { get; set; }
+        public NewCountViewModel NewCount { get; set; }
         #endregion
 
         #region Singleton

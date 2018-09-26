@@ -220,5 +220,10 @@ namespace Inv.Helpers
         {
             get { return Resource.ItemsList; }
         }
+        public static string Scan
+        {
+            get { return Resource.Scan; }
+        }
+
     }
 }

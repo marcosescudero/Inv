@@ -9,6 +9,7 @@
     using GalaSoft.MvvmLight.Command;
     using Inv.Helpers;
     using Inv.Models;
+    using Inv.Views;
     using Services;
     using Xamarin.Forms;
 
@@ -53,7 +54,7 @@
             set
             {
                 SetValue(ref filter, value);
-                this.RefreshList(); 
+                this.RefreshList();
             }
         }
         #endregion
@@ -214,6 +215,20 @@
                 return new RelayCommand(RefreshList);
             }
         }
+
+        public ICommand ScanCommand
+        {
+            get
+            {
+                return new RelayCommand(Scan);
+            }
+        }
+        private async void Scan()
+        {
+            MainViewModel.GetInstance().NewCount = new NewCountViewModel(true);
+            await App.Navigator.PushAsync(new NewCountPage());
+        }
+
 
         #endregion
     }

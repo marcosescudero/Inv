@@ -14,8 +14,6 @@ namespace Inv.ViewModels
         private Item item;
         private bool isRunning;
         private bool isEnabled;
-
-
         #endregion
 
         #region Properties
@@ -25,7 +23,6 @@ namespace Inv.ViewModels
             set { SetValue(ref this.item, value); }
         }
         public List<Count> MyItemCount { get; set; }
-
         #endregion
 
         #region Constructors

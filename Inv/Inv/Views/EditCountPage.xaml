@@ -6,7 +6,7 @@
              Title="{i18n:Translate InventoryCount}">
     <ContentPage.Content>
         <ScrollView
-            BindingContext="{Binding Login}"
+            BindingContext="{Binding EditCount}"
             BackgroundColor="{StaticResource Primary_Light}">
             <StackLayout>
                 <Grid
@@ -52,17 +52,17 @@
                         HeightRequest="46"
                         HorizontalOptions="FillAndExpand"
                         IsEnabled="{Binding IsEnabled}"
-                        Text="{i18n:Translate Login}"
+                        Text="{i18n:Translate Save}"
                         TextColor="{StaticResource AccentColor2}">
                     </Button>
                     <Button
                         BackgroundColor="{StaticResource Accent}"
                         BorderRadius="23"
-                        Command="{Binding RegisterCommand}"
+                        Command="{Binding ALGUNCommand}"
                         HeightRequest="46"
                         HorizontalOptions="FillAndExpand"
                         IsEnabled="{Binding IsEnabled}"
-                        Text="{i18n:Translate Register}"
+                        Text="{i18n:Translate Setup}"
                         TextColor="{StaticResource Icons}">
                     </Button>
                 </StackLayout>

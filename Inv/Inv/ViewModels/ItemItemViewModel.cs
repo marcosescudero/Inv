@@ -1,11 +1,12 @@
 ﻿namespace Inv.ViewModels
 {
+    using System;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using Inv.Common.Models;
     using Inv.Services;
     using Inv.Views;
-    
+
     public class ItemItemViewModel : Item
     {
         #region Attributes
@@ -30,7 +31,6 @@
                 return new RelayCommand(EditCount);
             }
         }
-
         private async void EditCount()
         {
             //MainViewModel.GetInstance().EditCount = new EditCountViewModel(this);

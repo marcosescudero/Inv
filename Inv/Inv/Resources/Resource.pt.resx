@@ -255,4 +255,7 @@
   <data name="ItemsList" xml:space="preserve">
     <value>Lista de itens</value>
   </data>
+  <data name="Scan" xml:space="preserve">
+    <value>Scan</value>
+  </data>
 </root>

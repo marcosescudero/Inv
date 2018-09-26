@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:i18n="clr-namespace:Inv.Helpers"
              x:Class="Inv.Views.CountsPage"
-            BindingContext="{Binding Main, Source={StaticResource Locator}}"
-            Title="{i18n:Translate InventoryCount}">
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="{i18n:Translate InventoryCount}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="ic_action_add_circle" Command="{Binding AddCountCommand}"/>
     </ContentPage.ToolbarItems>

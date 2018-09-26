@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using ZXing.Mobile;
 
 namespace Inv.Droid
 {
@@ -24,6 +25,9 @@ namespace Inv.Droid
 
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            // Inicializa el Scanner
+            MobileBarcodeScanner.Initialize(this.Application);
+            // ----
             LoadApplication(new App());
         }
     }
