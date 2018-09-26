@@ -28,18 +28,20 @@
                             TextColor="{StaticResource Icons}"
                             HeightRequest="46"
                             BorderRadius="23"
-                        WidthRequest="80" 
-                        HorizontalOptions="StartAndExpand"
-                        Command="{Binding InfoCommand}">
+                            WidthRequest="80" 
+                            HorizontalOptions="StartAndExpand"
+                            IsEnabled="{Binding IsEnabled}"
+                            Command="{Binding InfoCommand}">
                     </Button>
-                    <Button Text="Scan" 
+                    <Button Text="{i18n:Translate New}" 
                             BackgroundColor="{StaticResource Accent}"
                             TextColor="{StaticResource Icons}"
                             WidthRequest="80" 
                             HeightRequest="46"
                             BorderRadius="23"
                             HorizontalOptions="EndAndExpand"
-                            Command="{Binding ScanCommand}">
+                            IsEnabled="{Binding IsEnabled}"
+                            Command="{Binding NewCountCommand}">
                     </Button>
                 </StackLayout>
             </Frame>

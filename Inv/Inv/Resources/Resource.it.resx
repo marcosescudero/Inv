@@ -258,4 +258,7 @@
   <data name="Scan" xml:space="preserve">
     <value>scannerize</value>
   </data>
+  <data name="New" xml:space="preserve">
+    <value>Nuovo!</value>
+  </data>
 </root>

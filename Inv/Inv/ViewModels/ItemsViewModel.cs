@@ -23,6 +23,7 @@
         #region Attributes
         private string filter;
         private bool isRefreshing;
+        private bool isEnabled;
         private bool isBusy;
 
         //private ObservableCollection<CountItemViewModel> products;
@@ -42,6 +43,11 @@
         {
             get { return this.isRefreshing; }
             set { SetValue(ref this.isRefreshing, value); }
+        }
+        public bool IsEnabled
+        {
+            get { return this.isEnabled; }
+            set { SetValue(ref this.isEnabled, value); }
         }
         public bool IsBusy
         {
@@ -216,16 +222,16 @@
             }
         }
 
-        public ICommand ScanCommand
+        public ICommand NewCountCommand
         {
             get
             {
-                return new RelayCommand(Scan);
+                return new RelayCommand(NewCount);
             }
         }
-        private async void Scan()
+        private async void NewCount()
         {
-            MainViewModel.GetInstance().NewCount = new NewCountViewModel(true);
+            MainViewModel.GetInstance().NewCount = new NewCountViewModel();
             await App.Navigator.PushAsync(new NewCountPage());
         }
 

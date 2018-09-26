@@ -225,5 +225,9 @@ namespace Inv.Helpers
             get { return Resource.Scan; }
         }
 
+        public static string New
+        {
+            get { return Resource.New; }
+        }
     }
 }
