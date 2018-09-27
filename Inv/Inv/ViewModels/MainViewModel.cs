@@ -18,6 +18,7 @@
 
         #region ViewModels
         public LoginViewModel Login { get; set; }
+        public MeasureUnitsViewModel MeasureUnits { get; set; }
         public ItemsViewModel Items { get; set; }
         public CountsViewModel Counts { get; set; }
         public EditCountViewModel EditCount { get; set; }

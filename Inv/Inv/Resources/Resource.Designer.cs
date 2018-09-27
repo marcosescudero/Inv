@@ -322,6 +322,15 @@ namespace Inv.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Location Bins information available.
+        /// </summary>
+        public static string NoBinsMessage {
+            get {
+                return ResourceManager.GetString("NoBinsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No Inventory counts information available..
         /// </summary>
         public static string NoCountsMessage {
@@ -336,6 +345,33 @@ namespace Inv.Resources {
         public static string NoInternet {
             get {
                 return ResourceManager.GetString("NoInternet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Items information available.
+        /// </summary>
+        public static string NoItemsMessage {
+            get {
+                return ResourceManager.GetString("NoItemsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Location information available.
+        /// </summary>
+        public static string NoLocationMessage {
+            get {
+                return ResourceManager.GetString("NoLocationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Measure units information available.
+        /// </summary>
+        public static string NoMeasureUnitsMessage {
+            get {
+                return ResourceManager.GetString("NoMeasureUnitsMessage", resourceCulture);
             }
         }
         

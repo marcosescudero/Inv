@@ -79,11 +79,37 @@
                 return null;
             }
         }
+        public async Task<List<MeasureUnitLocal>> GetAllMeasureUnits()
+        {
+            try
+            {
+                var query = await this.connection.QueryAsync<MeasureUnitLocal>("select * from [MeasureUnit]");
+                var array = query.ToArray();
+                var list = array.Select(p => new MeasureUnitLocal
+                {
+                    MeasureUnitId = p.MeasureUnitId,
+                    Description = p.Description,
+                }).ToList();
+                return list;
+            }
+            catch (Exception e)
+            {
+                var errormessage = e.Message.ToString();
+                return null;
+            }
+        }
 
         public async Task DeleteAllItems()
         {
             var query = await this.connection.QueryAsync<Item>("delete from [Item]");
         }
+        public async Task DeleteAllMeasureUnits()
+        {
+            var query = await this.connection.QueryAsync<MeasureUnit>("delete from [MeasureUnit]");
+        }
+
+
+
 
         #endregion
     }

@@ -49,10 +49,13 @@
                 </Label>
                 <Picker 
                     Title="--Select--"
-                    ItemsSource="{Binding MySqliteMeasureUnits}"
+                    ItemsSource="{Binding MyMeasureUnits}"
                     ItemDisplayBinding="{Binding Description}"
-                    SelectedIndex="{Binding MeasureUnitSelectedIndex}">
+                    SelectedIndex="{Binding measureUnitSelectedIndex}">
                 </Picker>
+                <Label HorizontalTextAlignment="Center"
+                    Text="{Binding measureUnitSelectedIndex.MeasureUnitId}" >
+                </Label>
                 <ActivityIndicator
                     IsRunning="{Binding IsRunning}"
                     VerticalOptions="CenterAndExpand">

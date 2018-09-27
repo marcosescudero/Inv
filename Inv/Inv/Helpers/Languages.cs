@@ -229,5 +229,22 @@ namespace Inv.Helpers
         {
             get { return Resource.New; }
         }
+        public static string NoItemsMessage
+        {
+            get { return Resource.NoItemsMessage; }
+        }
+        public static string NoLocationMessage
+        {
+            get { return Resource.NoLocationMessage; }
+        }
+        public static string NoBinsMessage
+        {
+            get { return Resource.NoBinsMessage; }
+        }
+        public static string NoMeasureUnitsMessage
+        {
+            get { return Resource.NoMeasureUnitsMessage; }
+        }
+
     }
 }

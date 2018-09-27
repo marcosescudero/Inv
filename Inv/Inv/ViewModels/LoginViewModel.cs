@@ -115,8 +115,12 @@
 
             Settings.IsRemembered = this.IsRemembered;
 
-            MainViewModel.GetInstance().Items = new ItemsViewModel();
             //Application.Current.MainPage = new NavigationPage(new ItemsPage());
+
+            var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.MeasureUnits = new MeasureUnitsViewModel();
+            mainViewModel.Items = new ItemsViewModel();
+            
             Application.Current.MainPage = new MasterPage();
 
             this.IsRunning = false;

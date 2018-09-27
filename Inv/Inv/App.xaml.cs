@@ -30,6 +30,7 @@ namespace Inv
                 }
                 if (Settings.AccessToken != null && expireDate > DateTime.Now)
                 {
+                    mainViewModel.MeasureUnits = new MeasureUnitsViewModel();
                     mainViewModel.Items = new ItemsViewModel();
                     this.MainPage = new MasterPage();
                 } else

@@ -261,4 +261,16 @@
   <data name="New" xml:space="preserve">
     <value>Nuevo </value>
   </data>
+  <data name="NoItemsMessage" xml:space="preserve">
+    <value>¡No hay artículos disponibles!</value>
+  </data>
+  <data name="NoMeasureUnitsMessage" xml:space="preserve">
+    <value>¡No hay información del unidades de medida disponible!</value>
+  </data>
+  <data name="NoLocationMessage" xml:space="preserve">
+    <value>¡No hay información de ubicación disponible!</value>
+  </data>
+  <data name="NoBinsMessage" xml:space="preserve">
+    <value>¡No hay información de ubicación de contenedores disponible!</value>
+  </data>
 </root>

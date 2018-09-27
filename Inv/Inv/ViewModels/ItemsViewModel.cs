@@ -32,8 +32,7 @@
 
         #region Properties
         public List<Item> MyItems { get; set; }
-        public List<ItemLocal> MySqliteItems { get; set; }
-
+        public List<ItemLocal> MyItemsLocal { get; set; }
         public ObservableCollection<ItemItemViewModel> Items
         {
             get { return this.items; }
@@ -98,10 +97,11 @@
             var connection = await apiService.CheckConnection();
             if (connection.IsSuccess)
             {
+                
                 var answer = await this.LoadItemsFromAPI();
                 if (answer)
                 {
-                    this.SaveItemsToDB();
+                    this.SaveItemsToSqlite();
                 }
             } else
             {
@@ -112,7 +112,7 @@
             {
                 this.IsRefreshing = false;
                 this.IsBusy = false;
-                await Application.Current.MainPage.DisplayAlert(Languages.Error, Languages.NoCountsMessage, Languages.Accept);
+                await Application.Current.MainPage.DisplayAlert(Languages.Error, Languages.NoItemsMessage, Languages.Accept);
                 return;
             }
 
@@ -127,7 +127,6 @@
             var url = Application.Current.Resources["UrlAPI"].ToString(); // Obtengo la url del diccionario de recursos.
             var prefix = Application.Current.Resources["UrlPrefix"].ToString(); // Obtengo el prefijo del diccionario de recursos.
             var controller = Application.Current.Resources["UrlItemsController"].ToString(); // Obtengo el controlador del diccionario de recursos.
-
             //var response = await this.apiService.GetList<Item>(url, prefix, controller);
             var response = await this.apiService.GetList<Item>(url, prefix, controller, Settings.TokenType, Settings.AccessToken);
 
@@ -137,7 +136,7 @@
                 return false;
             }
             this.MyItems = (List<Item>)response.Result; // hay que castearlo
-            this.MySqliteItems = this.MyItems.Select(P => new ItemLocal
+            this.MyItemsLocal = this.MyItems.Select(P => new ItemLocal
             {
                 Barcode = P.Barcode,
                 ItemId = P.ItemId,
@@ -148,19 +147,17 @@
             return true;
         }
 
-        private async Task SaveItemsToDB()
+        private async Task SaveItemsToSqlite()
         {
             await this.dataService.DeleteAllItems();
-
-            this.dataService.Insert(this.MySqliteItems); // Nota: En este método no necesitamos el await.
-            //this.dataService.Insert(this.MyItems); // Nota: En este método no necesitamos el await.
+            this.dataService.Insert(this.MyItemsLocal); // Nota: En este método no necesitamos el await.
         }
 
         private async Task LoadItemsFromDB()
         {
-            this.MySqliteItems = await this.dataService.GetAllItems();
+            this.MyItemsLocal = await this.dataService.GetAllItems();
 
-            this.MyItems = this.MySqliteItems.Select(p => new Item
+            this.MyItems = this.MyItemsLocal.Select(p => new Item
             {
                 ItemId = p.ItemId,
                 Barcode = p.Barcode,
@@ -170,7 +167,6 @@
             }).ToList();
             //this.MyItems = await this.dataService.GetAllItems();
         }
-
 
         public void RefreshList()
         {
