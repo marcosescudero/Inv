@@ -51,7 +51,7 @@
                     Title="--Select--"
                     ItemsSource="{Binding MyMeasureUnits}"
                     ItemDisplayBinding="{Binding Description}"
-                    SelectedIndex="{Binding measureUnitSelectedIndex}">
+                    SelectedIndex="{Binding MeasureUnitSelectedIndex}">
                 </Picker>
                 <Label HorizontalTextAlignment="Center"
                     Text="{Binding measureUnitSelectedIndex.MeasureUnitId}" >

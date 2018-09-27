@@ -20,7 +20,6 @@
         private string barcode;
         private bool isRunning;
         private bool isEnabled;
-        private MeasureUnit measureUnitSelectedIndex;
         #endregion
 
         #region Services
@@ -47,13 +46,6 @@
         {
             get { return this.barcode; }
             set { SetValue(ref this.barcode, value); }
-        }
-
-        
-        public MeasureUnit MeasureUnitSelectedIndex
-        {
-            get { return this.measureUnitSelectedIndex; }
-            set { SetValue(ref this.measureUnitSelectedIndex, value); }
         }
         
         #endregion
