@@ -24,7 +24,6 @@
         private string filter;
         private bool isRefreshing;
         private bool isEnabled;
-        private bool isBusy;
 
         //private ObservableCollection<CountItemViewModel> products;
         private ObservableCollection<ItemItemViewModel> items;
@@ -47,11 +46,6 @@
         {
             get { return this.isEnabled; }
             set { SetValue(ref this.isEnabled, value); }
-        }
-        public bool IsBusy
-        {
-            get { return this.isBusy; }
-            set { SetValue(ref this.isBusy, value); }
         }
         public string Filter
         {
@@ -83,8 +77,7 @@
             this.apiService = new ApiService();
             this.dataService = new DataService();
             this.LoadItems();
-            this.IsRefreshing = false;
-            this.IsBusy = false;
+            //this.IsRefreshing = false;
         }
         #endregion
 
@@ -92,7 +85,6 @@
         private async void LoadItems()
         {
             this.IsRefreshing = true;
-            this.IsBusy = true;
 
             var connection = await apiService.CheckConnection();
             if (connection.IsSuccess)
@@ -111,14 +103,11 @@
             if (this.MyItems == null || this.MyItems.Count == 0)
             {
                 this.IsRefreshing = false;
-                this.IsBusy = false;
                 await Application.Current.MainPage.DisplayAlert(Languages.Error, Languages.NoItemsMessage, Languages.Accept);
                 return;
             }
-
             this.RefreshList();
             this.IsRefreshing = false;
-            this.IsBusy = false;
         }
 
         private async Task<bool> LoadItemsFromAPI()

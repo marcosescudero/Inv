@@ -123,8 +123,8 @@
             
             Application.Current.MainPage = new MasterPage();
 
-            this.IsRunning = false;
-            this.IsEnabled = true;
+            //this.IsRunning = false;
+            //this.IsEnabled = true;
 
         }
         #endregion
