@@ -13,9 +13,6 @@
         public string Description { get; set; }
 
         [JsonIgnore]
-        public virtual ICollection<Bin> Bin { get; set; }
-
-        [JsonIgnore]
         public virtual ICollection<Count> Counts { get; set; }
     }
 }

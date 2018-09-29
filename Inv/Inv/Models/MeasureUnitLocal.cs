@@ -2,7 +2,6 @@
 
 namespace Inv.Models
 {
-    using Common.Models;
     using SQLite;
 
     [Table("MeasureUnit")]

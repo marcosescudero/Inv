@@ -119,8 +119,8 @@
 
             var mainViewModel = MainViewModel.GetInstance();
             mainViewModel.MeasureUnits = new MeasureUnitsViewModel();
+            mainViewModel.Locations = new LocationsViewModel();
             mainViewModel.Items = new ItemsViewModel();
-            
             Application.Current.MainPage = new MasterPage();
 
             //this.IsRunning = false;

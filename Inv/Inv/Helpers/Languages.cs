@@ -233,18 +233,13 @@ namespace Inv.Helpers
         {
             get { return Resource.NoItemsMessage; }
         }
-        public static string NoLocationMessage
+        public static string NoLocationsMessage
         {
-            get { return Resource.NoLocationMessage; }
+            get { return Resource.NoLocationsMessage; }
         }
         public static string NoBinsMessage
         {
             get { return Resource.NoBinsMessage; }
         }
-        public static string NoMeasureUnitsMessage
-        {
-            get { return Resource.NoMeasureUnitsMessage; }
-        }
-
     }
 }

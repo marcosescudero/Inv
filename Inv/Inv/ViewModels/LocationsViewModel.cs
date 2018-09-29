@@ -1,15 +1,15 @@
 ﻿namespace Inv.ViewModels
 {
+    using Inv.Common.Models;
+    using Inv.Helpers;
+    using Inv.Models;
+    using Inv.Services;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Common.Models;
-    using Inv.Helpers;
-    using Inv.Models;
-    using Services;
     using Xamarin.Forms;
 
-    public class MeasureUnitsViewModel:BaseViewModel
+    public class LocationsViewModel:BaseViewModel
     {
         #region Services
         private ApiService apiService;
@@ -22,8 +22,8 @@
         #endregion
 
         #region Properties
-        public List<MeasureUnit> MyMeasureUnits { get; set; }
-        public List<MeasureUnitLocal> MyMeasureUnitsLocal { get; set; }
+        public List<Location> MyLocations { get; set; }
+        public List<LocationLocal> MyLocationsLocal { get; set; }
         public bool IsRefreshing
         {
             get { return this.isRefreshing; }
@@ -37,30 +37,30 @@
         #endregion
 
         #region Singleton
-        private static MeasureUnitsViewModel instance; // Atributo
-        public static MeasureUnitsViewModel GetInstance()
+        private static LocationsViewModel instance; // Atributo
+        public static LocationsViewModel GetInstance()
         {
             if (instance == null)
             {
-                instance = new MeasureUnitsViewModel();
+                instance = new LocationsViewModel();
             }
             return instance;
         }
         #endregion
 
         #region Constructors
-        public MeasureUnitsViewModel()
+        public LocationsViewModel()
         {
             instance = this;
             this.apiService = new ApiService();
             this.dataService = new DataService();
-            this.LoadMeasureUnits();
+            this.LoadLocations();
             this.IsRefreshing = false;
         }
         #endregion
 
         #region Methods
-        private async void LoadMeasureUnits()
+        private async void LoadLocations()
         {
             this.IsRefreshing = true;
             this.IsEnabled = false;
@@ -69,18 +69,18 @@
             if (connection.IsSuccess)
             {
 
-                var answer = await this.LoadMeasureUnitsFromAPI();
+                var answer = await this.LoadLocationsFromAPI();
                 if (answer)
                 {
-                    this.SaveMeasureUnitsToSqlite();
+                    this.SaveLocationsToSqlite();
                 }
             }
             else
             {
-                await this.LoadMeasureUnitsFromDB();
+                await this.LoadLocationsFromDB();
             }
 
-            if (this.MyMeasureUnits == null || this.MyMeasureUnits.Count == 0)
+            if (this.MyLocations == null || this.MyLocations.Count == 0)
             {
                 this.IsRefreshing = false;
                 this.IsEnabled = true;
@@ -92,43 +92,43 @@
             this.IsEnabled = true;
         }
 
-        private async Task<bool> LoadMeasureUnitsFromAPI()
+        private async Task<bool> LoadLocationsFromAPI()
         {
             //var response = await this.apiService.GetList<Product>("http://200.55.241.235", "/InvAPI/api", "/Products");
             var url = Application.Current.Resources["UrlAPI"].ToString(); // Obtengo la url del diccionario de recursos.
             var prefix = Application.Current.Resources["UrlPrefix"].ToString(); // Obtengo el prefijo del diccionario de recursos.
-            var controller = Application.Current.Resources["UrlMeasureUnitsController"].ToString(); // Obtengo el controlador del diccionario de recursos.
-            var response = await this.apiService.GetList<MeasureUnit>(url, prefix, controller, Settings.TokenType, Settings.AccessToken);
+            var controller = Application.Current.Resources["UrlLocationsController"].ToString(); // Obtengo el controlador del diccionario de recursos.
+            var response = await this.apiService.GetList<Location>(url, prefix, controller, Settings.TokenType, Settings.AccessToken);
             if (!response.IsSuccess)
             {
                 return false;
             }
-            this.MyMeasureUnits = (List<MeasureUnit>)response.Result; // hay que castearlo
-            this.MyMeasureUnitsLocal = this.MyMeasureUnits.Select(P => new MeasureUnitLocal
+            this.MyLocations = (List<Location>)response.Result; // hay que castearlo
+            this.MyLocationsLocal = this.MyLocations.Select(P => new LocationLocal
             {
-                MeasureUnitId = P.MeasureUnitId,
+                LocationId = P.LocationId,
                 Description = P.Description,
             }).ToList();
             return true;
         }
 
-        private async Task SaveMeasureUnitsToSqlite()
+        private async Task SaveLocationsToSqlite()
         {
-            await this.dataService.DeleteAllMeasureUnits();
-            this.dataService.Insert(this.MyMeasureUnitsLocal); // Nota: En este método no necesitamos el await.
+            await this.dataService.DeleteAllLocations();
+            this.dataService.Insert(this.MyLocationsLocal); // Nota: En este método no necesitamos el await.
         }
 
-        private async Task LoadMeasureUnitsFromDB()
+        private async Task LoadLocationsFromDB()
         {
-            this.MyMeasureUnitsLocal = await this.dataService.GetAllMeasureUnits();
+            this.MyLocationsLocal = await this.dataService.GetAllLocations();
 
-            this.MyMeasureUnits = this.MyMeasureUnitsLocal.Select(p => new MeasureUnit
+            this.MyLocations = this.MyLocationsLocal.Select(p => new Location
             {
-                MeasureUnitId = p.MeasureUnitId,
+                LocationId = p.LocationId,
                 Description = p.Description,
             }).ToList();
-            //this.MyItems = await this.dataService.GetAllItems();
         }
         #endregion
     }
 }
+

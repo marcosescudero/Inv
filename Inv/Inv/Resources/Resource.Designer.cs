@@ -88,6 +88,15 @@ namespace Inv.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Location bin.
+        /// </summary>
+        public static string Bin {
+            get {
+                return ResourceManager.GetString("Bin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Cancel {
@@ -277,11 +286,29 @@ namespace Inv.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Location.
+        /// </summary>
+        public static string Location {
+            get {
+                return ResourceManager.GetString("Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unit of Measurement.
+        /// </summary>
+        public static string MeasureUnit {
+            get {
+                return ResourceManager.GetString("MeasureUnit", resourceCulture);
             }
         }
         
@@ -358,11 +385,11 @@ namespace Inv.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No Location information available.
+        ///   Looks up a localized string similar to No Locations information available.
         /// </summary>
-        public static string NoLocationMessage {
+        public static string NoLocationsMessage {
             get {
-                return ResourceManager.GetString("NoLocationMessage", resourceCulture);
+                return ResourceManager.GetString("NoLocationsMessage", resourceCulture);
             }
         }
         

@@ -98,7 +98,25 @@
                 return null;
             }
         }
-
+        public async Task<List<LocationLocal>> GetAllLocations()
+        {
+            try
+            {
+                var query = await this.connection.QueryAsync<LocationLocal>("select * from [Location]");
+                var array = query.ToArray();
+                var list = array.Select(p => new LocationLocal
+                {
+                    LocationId = p.LocationId,
+                    Description = p.Description,
+                }).ToList();
+                return list;
+            }
+            catch (Exception e)
+            {
+                var errormessage = e.Message.ToString();
+                return null;
+            }
+        }
         public async Task DeleteAllItems()
         {
             var query = await this.connection.QueryAsync<Item>("delete from [Item]");
@@ -107,9 +125,10 @@
         {
             var query = await this.connection.QueryAsync<MeasureUnit>("delete from [MeasureUnit]");
         }
-
-
-
+        public async Task DeleteAllLocations()
+        {
+            var query = await this.connection.QueryAsync<Location>("delete from [Location]");
+        }
 
         #endregion
     }

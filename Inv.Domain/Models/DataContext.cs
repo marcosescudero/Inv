@@ -23,8 +23,6 @@ namespace Inv.Domain.Models
 
         public DbSet<Inv.Common.Models.MeasureUnit> MeasureUnits { get; set; }
 
-        public DbSet<Inv.Common.Models.Bin> Bins { get; set; }
-
         public DbSet<Inv.Common.Models.Count> Counts { get; set; }
 
     }

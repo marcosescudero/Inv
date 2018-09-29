@@ -16,17 +16,10 @@ namespace Inv.Backend.Controllers
     {
         private LocalDataContext db = new LocalDataContext();
 
-        public JsonResult GetBins(int locationId)
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-            var bins = db.Bins.Where(m => m.LocationId == locationId);
-            return Json(bins);
-        }
-
         // GET: Counts
         public async Task<ActionResult> Index()
         {
-            var counts = db.Counts.Include(c => c.Bin).Include(c => c.Item).Include(c => c.Location).Include(c => c.MeasureUnit);
+            var counts = db.Counts.Include(c => c.Item).Include(c => c.Location).Include(c => c.MeasureUnit);
             return View(await counts.ToListAsync());
         }
 
@@ -48,20 +41,8 @@ namespace Inv.Backend.Controllers
         // GET: Counts/Create
         public ActionResult Create()
         {
-            /*
-            ViewBag.BinId = new SelectList(db.Bins, "BinId", "Description");
             ViewBag.ItemId = new SelectList(db.Items, "ItemId", "Barcode");
             ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "Description");
-            ViewBag.MeasureUnitId = new SelectList(db.MeasureUnits, "MeasureUnitId", "Description");
-            return View();
-            */
-
-            ViewBag.ItemId = new SelectList(db.Items, "ItemId", "Barcode");
-            ViewBag.LocationId = new SelectList(db.Locations,
-                    "LocationId", "Description");
-            ViewBag.BinId = new SelectList(db.Bins
-                    .Where(m => m.LocationId == db.Locations.FirstOrDefault().LocationId),
-                    "BinId", "Description");
             ViewBag.MeasureUnitId = new SelectList(db.MeasureUnits, "MeasureUnitId", "Description");
             return View();
         }
@@ -71,7 +52,7 @@ namespace Inv.Backend.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "CountId,ItemId,LocationId,BinId,MeasureUnitId,Quantity,CountDate")] Count count)
+        public async Task<ActionResult> Create([Bind(Include = "CountId,ItemId,LocationId,MeasureUnitId,Quantity,CountDate")] Count count)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +61,6 @@ namespace Inv.Backend.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.BinId = new SelectList(db.Bins, "BinId", "Description", count.BinId);
             ViewBag.ItemId = new SelectList(db.Items, "ItemId", "Barcode", count.ItemId);
             ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "Description", count.LocationId);
             ViewBag.MeasureUnitId = new SelectList(db.MeasureUnits, "MeasureUnitId", "Description", count.MeasureUnitId);
@@ -99,20 +79,9 @@ namespace Inv.Backend.Controllers
             {
                 return HttpNotFound();
             }
-            //ViewBag.BinId = new SelectList(db.Bins, "BinId", "Description", count.BinId);
             ViewBag.ItemId = new SelectList(db.Items, "ItemId", "Barcode", count.ItemId);
-            //ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "Description", count.LocationId);
+            ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "Description", count.LocationId);
             ViewBag.MeasureUnitId = new SelectList(db.MeasureUnits, "MeasureUnitId", "Description", count.MeasureUnitId);
-
-            ViewBag.LocationId = new SelectList(db.Locations,
-                "LocationId", "Description",
-                count.LocationId);
-            ViewBag.BinId = new SelectList(db.Bins
-                .Where(m => m.BinId == count.BinId),
-                "BinId", "Description",
-                count.BinId);
-
-
             return View(count);
         }
 
@@ -121,7 +90,7 @@ namespace Inv.Backend.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "CountId,ItemId,LocationId,BinId,MeasureUnitId,Quantity,CountDate")] Count count)
+        public async Task<ActionResult> Edit([Bind(Include = "CountId,ItemId,LocationId,MeasureUnitId,Quantity,CountDate")] Count count)
         {
             if (ModelState.IsValid)
             {
@@ -129,7 +98,6 @@ namespace Inv.Backend.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.BinId = new SelectList(db.Bins, "BinId", "Description", count.BinId);
             ViewBag.ItemId = new SelectList(db.Items, "ItemId", "Barcode", count.ItemId);
             ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "Description", count.LocationId);
             ViewBag.MeasureUnitId = new SelectList(db.MeasureUnits, "MeasureUnitId", "Description", count.MeasureUnitId);

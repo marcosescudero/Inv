@@ -55,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Models\Bin.cs" />
     <Compile Include="Models\Count.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Location.cs" />

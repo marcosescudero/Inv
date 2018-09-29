@@ -119,7 +119,6 @@
             //var response = await this.apiService.GetList<Item>(url, prefix, controller);
             var response = await this.apiService.GetList<Item>(url, prefix, controller, Settings.TokenType, Settings.AccessToken);
 
-
             if (!response.IsSuccess)
             {
                 return false;
@@ -188,6 +187,7 @@
                 this.Items = new ObservableCollection<ItemItemViewModel>(
                     myListItemItemViewModel.OrderBy(p => p.Description));
             }
+            this.IsRefreshing = false;
         }
         #endregion
 

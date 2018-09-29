@@ -25,7 +25,6 @@ namespace Inv.API.Controllers
                  db.Counts
                 .Include(i => i.Item)
                 .Include(i => i.Location)
-                .Include(i => i.Bin)
                 .Include(i => i.MeasureUnit);
                 
         }
@@ -38,7 +37,6 @@ namespace Inv.API.Controllers
             Count count = await db.Counts
                 .Include(i => i.Item)
                 .Include(i => i.Location)
-                .Include(i => i.Bin)
                 .Include(i => i.MeasureUnit)
                 .FirstOrDefaultAsync(i => i.CountId == id);
 
@@ -59,7 +57,6 @@ namespace Inv.API.Controllers
             Count count = await db.Counts
                 .Include(i => i.Item)
                 .Include(i => i.Location)
-                .Include(i => i.Bin)
                 .Include(i => i.MeasureUnit)
                 .FirstOrDefaultAsync(i => i.ItemId == ItemId);
 

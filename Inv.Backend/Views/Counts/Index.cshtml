@@ -12,9 +12,6 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Bin.Description)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Item.Barcode)
         </th>
         <th>
@@ -34,9 +31,6 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Bin.Description)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Item.Barcode)
         </td>

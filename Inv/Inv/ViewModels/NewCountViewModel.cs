@@ -8,13 +8,11 @@
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using Inv.Common.Models;
-    using Inv.Helpers;
     using Inv.Interfaces;
-    using Inv.Models;
     using Inv.Services;
     using Xamarin.Forms;
 
-    public class NewCountViewModel :BaseViewModel
+    public class NewCountViewModel : BaseViewModel
     {
         #region Attributes
         private string barcode;
@@ -24,14 +22,16 @@
 
         #region Services
         private ApiService apiService;
+        private Location locationSelected;
+        private MeasureUnit measureUnitSelected;
         #endregion
 
         #region Properties
         public List<Item> Items { get; set; }
         public List<MeasureUnit> MyMeasureUnits { get; set; }
-        public List<MeasureUnitLocal> MeasureUnitsLocal { get; set; }
-        public List<Location> Locations { get; set; }
-        public List<Bin> Bins { get; set; }
+        public List<Location> MyLocations { get; set; }
+        public ObservableCollection<MeasureUnit> MeasureUnits { get; set; }
+        public ObservableCollection<Location> Locations { get; set; }
         public bool IsRunning
         {
             get { return this.isRunning; }
@@ -47,7 +47,17 @@
             get { return this.barcode; }
             set { SetValue(ref this.barcode, value); }
         }
-        
+        public Location LocationSelected
+        {
+            get { return this.locationSelected; }
+            set { SetValue(ref this.locationSelected, value); }
+        }
+        public MeasureUnit MeasureUnitSelected
+        {
+            get { return this.measureUnitSelected; }
+            set { SetValue(ref this.measureUnitSelected, value); }
+        }
+
         #endregion
 
         #region Constructors
@@ -56,7 +66,25 @@
             this.IsRunning = false;
             this.IsEnabled = true;
             this.apiService = new ApiService();
-            this.MyMeasureUnits = MainViewModel.GetInstance().MeasureUnits.MyMeasureUnits;
+            LocationSelected = new Location();
+
+            // Measure units
+            this.MyMeasureUnits = MainViewModel.GetInstance().
+                MeasureUnits.MyMeasureUnits.Select(p => new MeasureUnit
+                {
+                    MeasureUnitId = p.MeasureUnitId,
+                    Description = p.Description,
+                }).ToList();
+            this.MeasureUnits = new ObservableCollection<MeasureUnit>(this.MyMeasureUnits);
+
+            // Locations
+            this.MyLocations = MainViewModel.GetInstance().
+                Locations.MyLocations.Select(p => new Location
+                {
+                    LocationId = p.LocationId,
+                    Description = p.Description,
+                }).ToList();
+            this.Locations = new ObservableCollection<Location>(this.MyLocations);
         }
         #endregion
 

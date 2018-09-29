@@ -10,6 +10,10 @@
             BindingContext="{Binding NewCount}"
             BackgroundColor="{StaticResource Primary_Light}">
             <StackLayout>
+                <Label
+                    Text="{Binding Description}"
+                    TextColor="{StaticResource FontColor}">
+                </Label>
                 <Grid
                     Padding="5,0,5,0"
                     VerticalOptions="CenterAndExpand">
@@ -42,19 +46,52 @@
                         Grid.Column="1"
                         Text="{Binding Barcode, Mode=TwoWay}">
                     </Entry>
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Text="U.M."
+                        TextColor="{StaticResource FontColor}"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Picker 
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Title="--Select--"
+                        ItemDisplayBinding="{Binding Description}"
+                        ItemsSource="{Binding MeasureUnits}"
+                        SelectedItem="{Binding MeasureUnitSelected, Mode=TwoWay}">
+                    </Picker>
+                    <Label
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Text="Location"
+                        TextColor="{StaticResource FontColor}"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Picker 
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Title="--Select--"
+                        ItemDisplayBinding="{Binding Description}"
+                        ItemsSource="{Binding Locations}"
+                        SelectedItem="{Binding LocationSelected, Mode=TwoWay}">
+                    </Picker>
+                    <Label
+                        Grid.Row="4"
+                        Grid.Column="0"
+                        Text="Quantity"
+                        TextColor="{StaticResource FontColor}"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Entry
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Keyboard="Numeric"
+                        Text="{Binding Quantity}">
+                    </Entry>                    
                 </Grid>
-                <Label
-                    Text="{Binding Description}"
-                    TextColor="{StaticResource FontColor}">
-                </Label>
-                <Picker 
-                    Title="--Select--"
-                    ItemsSource="{Binding MyMeasureUnits}"
-                    ItemDisplayBinding="{Binding Description}"
-                    SelectedIndex="{Binding MeasureUnitSelectedIndex}">
-                </Picker>
                 <Label HorizontalTextAlignment="Center"
-                    Text="{Binding measureUnitSelectedIndex.MeasureUnitId}" >
+                    Text="{Binding LocationSelected.LocationId}" >
                 </Label>
                 <ActivityIndicator
                     IsRunning="{Binding IsRunning}"

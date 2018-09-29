@@ -267,10 +267,19 @@
   <data name="NoMeasureUnitsMessage" xml:space="preserve">
     <value>¡No hay información del unidades de medida disponible!</value>
   </data>
-  <data name="NoLocationMessage" xml:space="preserve">
-    <value>¡No hay información de ubicación disponible!</value>
-  </data>
   <data name="NoBinsMessage" xml:space="preserve">
     <value>¡No hay información de ubicación de contenedores disponible!</value>
+  </data>
+  <data name="NoLocationsMessage" xml:space="preserve">
+    <value>¡No hay información de lugares disponible!</value>
+  </data>
+  <data name="MeasureUnit" xml:space="preserve">
+    <value>Unidad de medida</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Ubicación</value>
+  </data>
+  <data name="Bin" xml:space="preserve">
+    <value>Ubicación bin!</value>
   </data>
 </root>
