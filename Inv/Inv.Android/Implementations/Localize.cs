@@ -60,8 +60,36 @@ namespace Inv.Droid.Implementations
                 case "gsw-CH":  // "Schwiizertüütsch (Swiss German)" not supported .NET culture
                     netLanguage = "de-CH"; // closest supported
                     break;
-                    // add more application-specific cases here (if required)
-                    // ONLY use cultures that have been tested and known to work
+                // add more application-specific cases here (if required)
+                // ONLY use cultures that have been tested and known to work
+                case "es-419":
+                case "es-AR":
+                case "es-BO":
+                case "es-CL":
+                case "es-CO":
+                case "es-CR":
+                case "es-CU":
+                case "es-DO":
+                case "es-EA":
+                case "es-EC":
+                case "es-ES":
+                case "es-GQ":
+                case "es-GT":
+                case "es-HN":
+                case "es-IC":
+                case "es-MX":
+                case "es-NI":
+                case "es-PA":
+                case "es-PE":
+                case "es-PH":
+                case "es-PR":
+                case "es-PY":
+                case "es-SV":
+                case "es-US":
+                case "es-UY":
+                case "es-VE":
+                    netLanguage = "es"; // closest supported
+                    break;
             }
             return netLanguage;
         }

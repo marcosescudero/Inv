@@ -3,11 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Globalization;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using Inv.Common.Models;
+    using Inv.Helpers;
     using Inv.Interfaces;
     using Inv.Services;
     using Xamarin.Forms;
@@ -16,8 +18,11 @@
     {
         #region Attributes
         private string barcode;
+        private int itemId;
+
         private bool isRunning;
         private bool isEnabled;
+        private Item item;
         #endregion
 
         #region Services
@@ -42,10 +47,20 @@
             get { return this.isEnabled; }
             set { SetValue(ref this.isEnabled, value); }
         }
+        public int ItemId
+        {
+            get { return this.itemId; }
+            set { SetValue(ref this.itemId, value); }
+        }
         public string Barcode
         {
             get { return this.barcode; }
             set { SetValue(ref this.barcode, value); }
+        }
+        public Item Item
+        {
+            get { return this.item; }
+            set { SetValue(ref this.item, value); }
         }
         public Location LocationSelected
         {
@@ -63,6 +78,7 @@
         #region Constructors
         public NewCountViewModel()
         {
+
             this.IsRunning = false;
             this.IsEnabled = true;
             this.apiService = new ApiService();
@@ -89,6 +105,62 @@
         #endregion
 
         #region Commands
+
+        public ICommand ItemIdChangedCommand
+        {
+            get
+            {
+                return new RelayCommand(ItemIdChanged);
+            }
+        }
+
+        private void ItemIdChanged()
+        {
+            if (this.ItemId != 0)
+            {
+                this.Item = MainViewModel.GetInstance().
+                    Items.MyItems.Where(p => p.ItemId == this.ItemId).FirstOrDefault();
+                if (this.Item != null)
+                {
+                    //await Application.Current.MainPage.DisplayAlert("Eureka", this.Item.Description, Languages.Accept);
+                    // Le coloca la U.M. por Default
+                    this.MeasureUnitSelected = this.MyMeasureUnits.Where(p => p.MeasureUnitId == this.Item.MeasureUnitId).FirstOrDefault();
+                    if (string.IsNullOrEmpty(this.Barcode))
+                    {
+                        this.Barcode = this.Item.Barcode;
+                    }
+                }
+            }
+        }
+
+        public ICommand BarcodeChangedCommand
+        {
+            get
+            {
+                return new RelayCommand(BarcodeChanged);
+            }
+        }
+
+        private void BarcodeChanged()
+        {
+            if (this.Item != null)
+                if (!string.IsNullOrEmpty(this.Barcode)) 
+                    if (this.Item.Barcode == this.Barcode)
+                        return;
+
+            if (!string.IsNullOrEmpty(this.Barcode))
+            {
+                this.Item = MainViewModel.GetInstance().
+                    Items.MyItems.Where(p => p.Barcode == this.Barcode).FirstOrDefault();
+                if (this.Item != null)
+                {
+                    //await Application.Current.MainPage.DisplayAlert("Eureka", this.Item.Description, Languages.Accept);
+                    // Le coloca la U.M. por Default
+                    this.MeasureUnitSelected = this.MyMeasureUnits.Where(p => p.MeasureUnitId == this.Item.MeasureUnitId).FirstOrDefault();
+                }
+            }
+        }
+
         public ICommand ScanCommand
         {
             get

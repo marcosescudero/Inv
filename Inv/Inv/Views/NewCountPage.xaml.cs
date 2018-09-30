@@ -16,5 +16,5 @@ namespace Inv.Views
 		{
 			InitializeComponent ();
 		}
-	}
+    }
 }

@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:b="clr-namespace:Inv.Behaviors"
         xmlns:i18n="clr-namespace:Inv.Helpers"
         x:Class="Inv.Views.NewCountPage"
         BindingContext="{Binding Main, Source={StaticResource Locator}}"
@@ -9,9 +10,13 @@
         <ScrollView
             BindingContext="{Binding NewCount}"
             BackgroundColor="{StaticResource Primary_Light}">
-            <StackLayout>
+            <StackLayout
+                Padding="5,0,5,0">
                 <Label
-                    Text="{Binding Description}"
+                    FontAttributes="Bold"
+                    HorizontalTextAlignment="Center"
+                    FontSize="Large"
+                    Text="{Binding Item.Description, Mode=TwoWay}"
                     TextColor="{StaticResource FontColor}">
                 </Label>
                 <Grid
@@ -32,7 +37,14 @@
                         Grid.Row="0"
                         Grid.Column="1"
                         Keyboard="Numeric"
-                        Text="{Binding ItemId}">
+                        Text="{Binding Item.ItemId, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <b:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding ItemIdChangedCommand}"
+                                CommandParameter="Averiguar este parametro"/>
+                        </Entry.Behaviors>
+
                     </Entry>
                     <Label
                         Grid.Row="1"
@@ -45,6 +57,12 @@
                         Grid.Row="1"
                         Grid.Column="1"
                         Text="{Binding Barcode, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <b:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding BarcodeChangedCommand}"
+                                CommandParameter="Averiguar este parametro"/>
+                        </Entry.Behaviors>
                     </Entry>
                     <Label
                         Grid.Row="2"
@@ -86,8 +104,8 @@
                     <Entry
                         Grid.Row="4"
                         Grid.Column="1"
-                        Keyboard="Numeric"
-                        Text="{Binding Quantity}">
+                        Text="{Binding Quantity}"
+                        Keyboard="Telephone">
                     </Entry>                    
                 </Grid>
                 <Label HorizontalTextAlignment="Center"
