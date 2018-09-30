@@ -77,6 +77,7 @@
             this.apiService = new ApiService();
             this.dataService = new DataService();
             this.LoadItems();
+            this.IsEnabled = true;
             //this.IsRefreshing = false;
         }
         #endregion

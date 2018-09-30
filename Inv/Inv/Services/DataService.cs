@@ -30,6 +30,8 @@
             var databasePath = DependencyService.Get<IPathService>().GetDatabasePath();
             this.connection = new SQLiteAsyncConnection(databasePath);
             await connection.CreateTableAsync<ItemLocal>().ConfigureAwait(false);
+            await connection.CreateTableAsync<MeasureUnitLocal>().ConfigureAwait(false);
+            await connection.CreateTableAsync<LocationLocal>().ConfigureAwait(false);
         }
 
         public async Task Insert<T>(T model)

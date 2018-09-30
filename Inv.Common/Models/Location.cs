@@ -10,6 +10,7 @@
 
         [Required]
         [StringLength(250)]
+        [Display(Name = "Location Description")]
         public string Description { get; set; }
 
         [JsonIgnore]

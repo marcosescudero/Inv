@@ -14,6 +14,7 @@
 
         [Required]
         [StringLength(250)]
+        [Display(Name = "Item Description")]
         public string Description { get; set; }
 
         [Required]
