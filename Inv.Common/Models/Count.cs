@@ -28,6 +28,9 @@ namespace Inv.Common.Models
         [DataType(DataType.Date)]
         public DateTime CountDate { get; set; }
 
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
         public virtual Item Item { get; set; }
         public virtual MeasureUnit MeasureUnit { get; set; }
         public virtual Location Location { get; set; }

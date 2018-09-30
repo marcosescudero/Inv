@@ -241,5 +241,38 @@ namespace Inv.Helpers
         {
             get { return Resource.NoBinsMessage; }
         }
+        public static string ItemIdEmpty
+        {
+            get { return Resource.ItemIdEmpty; }
+        }
+        public static string MeasureUnitEmpty
+        {
+            get { return Resource.MeasureUnitEmpty; }
+        }
+        public static string LocationEmpty
+        {
+            get { return Resource.LocationEmpty; }
+        }
+        public static string QuantityNotValid
+        {
+            get { return Resource.QuantityNotValid; }
+        }
+        public static string QuantityEmpty
+        {
+            get { return Resource.QuantityEmpty; }
+        }
+        public static string CountConfirmation
+        {
+            get { return Resource.CountConfirmation; }
+        }
+        public static string ItemNonExist
+        {
+            get { return Resource.ItemNonExist; }
+        }
+        public static string DataSaved
+        {
+            get { return Resource.DataSaved; }
+        }
+
     }
 }

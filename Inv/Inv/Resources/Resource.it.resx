@@ -282,4 +282,28 @@
   <data name="Bin" xml:space="preserve">
     <value>LOCALIZZAZIONE</value>
   </data>
+  <data name="ItemIdEmpty" xml:space="preserve">
+    <value>È necessario immettere un Id di elemento valido!</value>
+  </data>
+  <data name="MeasureUnitEmpty" xml:space="preserve">
+    <value>È necessario immettere un'unità di misura!</value>
+  </data>
+  <data name="LocationEmpty" xml:space="preserve">
+    <value>È necessario immettere una posizione!</value>
+  </data>
+  <data name="QuantityNotValid" xml:space="preserve">
+    <value>La quantità immessa non è valida!</value>
+  </data>
+  <data name="QuantityEmpty" xml:space="preserve">
+    <value>Devi inserire una quantità!</value>
+  </data>
+  <data name="CountConfirmation" xml:space="preserve">
+    <value>Confermare questo numero di inventario?!</value>
+  </data>
+  <data name="ItemNonExist" xml:space="preserve">
+    <value>L'elemento è inesistente!</value>
+  </data>
+  <data name="DataSaved" xml:space="preserve">
+    <value>E' stato salvato.</value>
+  </data>
 </root>

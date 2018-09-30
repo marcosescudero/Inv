@@ -21,6 +21,8 @@
         private const string tokenType = "TokenType";
         private const string accessToken = "AccessToken";
         private const string tokenExpires = "TokenExpires";
+        private const string userName = "UserName";
+
 
         private const string userASP = "UserASP";
         private const string isRemembered = "IsRemembered";
@@ -76,6 +78,19 @@
                 AppSettings.AddOrUpdateValue(tokenExpires, value);
             }
         }
+
+        public static string UserName
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(userName, stringDefault);
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue(userName, value);
+            }
+        }
+
 
         public static bool IsRemembered
         {

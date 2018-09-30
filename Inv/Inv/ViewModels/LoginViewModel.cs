@@ -112,6 +112,7 @@
             Settings.TokenType = token.TokenType;
             Settings.AccessToken = token.AccessToken;
             Settings.TokenExpires = token.Expires.ToString();
+            Settings.UserName = token.UserName;
 
             Settings.IsRemembered = this.IsRemembered;
 

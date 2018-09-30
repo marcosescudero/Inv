@@ -30,6 +30,7 @@
                 Settings.AccessToken = string.Empty;
                 Settings.TokenType = string.Empty;
                 Settings.TokenExpires = string.Empty;
+                Settings.UserName = string.Empty;
                 Settings.IsRemembered = false;
 
                 MainViewModel.GetInstance().Login = new LoginViewModel();

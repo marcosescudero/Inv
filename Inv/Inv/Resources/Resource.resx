@@ -282,4 +282,28 @@
   <data name="Bin" xml:space="preserve">
     <value>Location bin</value>
   </data>
+  <data name="ItemIdEmpty" xml:space="preserve">
+    <value>You must enter a valid Item Id</value>
+  </data>
+  <data name="MeasureUnitEmpty" xml:space="preserve">
+    <value>You must enter a Measure Unit</value>
+  </data>
+  <data name="LocationEmpty" xml:space="preserve">
+    <value>You must enter a Location</value>
+  </data>
+  <data name="QuantityNotValid" xml:space="preserve">
+    <value>The Quantity entered is not valid</value>
+  </data>
+  <data name="QuantityEmpty" xml:space="preserve">
+    <value>You must enter a Quantity</value>
+  </data>
+  <data name="CountConfirmation" xml:space="preserve">
+    <value>Confirm this inventory count ?</value>
+  </data>
+  <data name="ItemNonExist" xml:space="preserve">
+    <value>The item is non-existent</value>
+  </data>
+  <data name="DataSaved" xml:space="preserve">
+    <value>Data has been saved</value>
+  </data>
 </root>

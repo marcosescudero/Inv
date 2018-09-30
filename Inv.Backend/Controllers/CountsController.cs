@@ -52,7 +52,7 @@ namespace Inv.Backend.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "CountId,ItemId,LocationId,MeasureUnitId,Quantity,CountDate")] Count count)
+        public async Task<ActionResult> Create([Bind(Include = "CountId,ItemId,LocationId,MeasureUnitId,Quantity,CountDate,UserName")] Count count)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace Inv.Backend.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "CountId,ItemId,LocationId,MeasureUnitId,Quantity,CountDate")] Count count)
+        public async Task<ActionResult> Edit([Bind(Include = "CountId,ItemId,LocationId,MeasureUnitId,Quantity,CountDate,UserName")] Count count)
         {
             if (ModelState.IsValid)
             {

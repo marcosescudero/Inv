@@ -124,6 +124,24 @@ namespace Inv.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm this inventory count ?.
+        /// </summary>
+        public static string CountConfirmation {
+            get {
+                return ResourceManager.GetString("CountConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data has been saved.
+        /// </summary>
+        public static string DataSaved {
+            get {
+                return ResourceManager.GetString("DataSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string Delete {
@@ -277,6 +295,24 @@ namespace Inv.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must enter a valid Item Id.
+        /// </summary>
+        public static string ItemIdEmpty {
+            get {
+                return ResourceManager.GetString("ItemIdEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The item is non-existent.
+        /// </summary>
+        public static string ItemNonExist {
+            get {
+                return ResourceManager.GetString("ItemNonExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Items List.
         /// </summary>
         public static string ItemsList {
@@ -295,6 +331,15 @@ namespace Inv.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must enter a Location.
+        /// </summary>
+        public static string LocationEmpty {
+            get {
+                return ResourceManager.GetString("LocationEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string Login {
@@ -309,6 +354,15 @@ namespace Inv.Resources {
         public static string MeasureUnit {
             get {
                 return ResourceManager.GetString("MeasureUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must enter a Measure Unit.
+        /// </summary>
+        public static string MeasureUnitEmpty {
+            get {
+                return ResourceManager.GetString("MeasureUnitEmpty", resourceCulture);
             }
         }
         
@@ -462,6 +516,24 @@ namespace Inv.Resources {
         public static string Products {
             get {
                 return ResourceManager.GetString("Products", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must enter a Quantity.
+        /// </summary>
+        public static string QuantityEmpty {
+            get {
+                return ResourceManager.GetString("QuantityEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Quantity entered is not valid.
+        /// </summary>
+        public static string QuantityNotValid {
+            get {
+                return ResourceManager.GetString("QuantityNotValid", resourceCulture);
             }
         }
         
